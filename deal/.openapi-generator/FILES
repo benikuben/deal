@@ -1,0 +1,17 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/ru/neoflex/openapi/controller/ApiUtil.java
+src/main/java/ru/neoflex/openapi/controller/DealApi.java
+src/main/java/ru/neoflex/openapi/dto/ApplicationStatus.java
+src/main/java/ru/neoflex/openapi/dto/ApplicationStatusHistoryDTO.java
+src/main/java/ru/neoflex/openapi/dto/ChangeType.java
+src/main/java/ru/neoflex/openapi/dto/EmploymentDTO.java
+src/main/java/ru/neoflex/openapi/dto/EmploymentStatus.java
+src/main/java/ru/neoflex/openapi/dto/FinishRegistrationRequestDTO.java
+src/main/java/ru/neoflex/openapi/dto/Gender.java
+src/main/java/ru/neoflex/openapi/dto/LoanApplicationRequestDTO.java
+src/main/java/ru/neoflex/openapi/dto/LoanOfferDTO.java
+src/main/java/ru/neoflex/openapi/dto/MaritalStatus.java
+src/main/java/ru/neoflex/openapi/dto/Position.java
+src/main/java/ru/neoflex/openapi/dto/ScoringDataDTO.java

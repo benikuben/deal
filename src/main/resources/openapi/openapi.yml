@@ -1,0 +1,576 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Deal API
+servers:
+  - url: https://localhost:8080
+    description: localhost
+paths:
+  /deal/application:
+    post:
+      summary: Calculation of loan terms
+      operationId: createApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanApplicationRequestDTO'
+      responses:
+        '200':
+          description: Application created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offers'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+  /deal/offer:
+    put:
+      summary: Choosing one of the offers
+      operationId: applyOffer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDTO'
+      responses:
+        '200':
+          description: Offer applied
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+  /deal/calculate/{applicationId}:
+    put:
+      summary: Completion of registration and full loan calculation
+      operationId: finishRegistration
+      parameters:
+        - name: applicationId
+          in: path
+          description: Id of application
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinishRegistrationRequestDTO'
+      responses:
+        '200':
+          description: Application updated
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+components:
+  schemas:
+    LoanApplicationRequestDTO:
+      description: Loan application request
+      type: object
+      x-class-extra-annotation: "@lombok.AllArgsConstructor"
+      required:
+        - amount
+        - term
+        - firstName
+        - lastName
+        - email
+        - birthdate
+        - passportSeries
+        - passportNumber
+      properties:
+        amount:
+          type: number
+          format: double
+          minimum: 10000.00
+          description: Loan amount
+          example: 10000.00
+        term:
+          type: integer
+          minimum: 6
+          description: Loan term
+          example: 6
+        firstName:
+          type: string
+          pattern: '^[A-Za-z]{2,30}$'
+          x-pattern-message: должно быть длиной от 2 до 30 латинских букв
+          description: First name
+          example: Ivan
+        lastName:
+          type: string
+          pattern: '^[A-Za-z]{2,30}$'
+          x-pattern-message: должно быть длиной от 2 до 30 латинских букв
+          description: Last name
+          example: Ivanov
+        middleName:
+          type: string
+          pattern: '^[A-Za-z]{2,30}$'
+          x-pattern-message: должно быть длиной от 2 до 30 латинских букв
+          description: Middle name
+          example: Ivanovich
+        email:
+          type: string
+          pattern: '^[\w.]{2,50}@[\w.]{2,20}$'
+          x-pattern-message: должен быть введен корректный email
+          description: Email
+          example: ivan@mail.ru
+        birthdate:
+          type: date
+          format: yyyy-mm-dd
+          x-field-extra-annotation: "@ru.neoflex.deal.util.validators.OverEighteenYearsOld 
+          @com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer.class)"
+          example: 2000-01-01
+        passportSeries:
+          type: string
+          pattern: '^[0-9]{4}$'
+          x-pattern-message: должно содержать 4 цифры
+          description: Passport series
+          example: 1234
+        passportNumber:
+          type: string
+          pattern: '^[0-9]{6}$'
+          x-pattern-message: должно содержать 6 цифр
+          description: Passport number
+          example: 123456
+    LoanOfferDTO:
+      description: Loan offer
+      type: object
+      required:
+        - applicationId
+        - requestedAmount
+        - totalAmount
+        - term
+        - monthlyPayment
+        - rate
+        - isInsuranceEnabled
+        - isSalaryClient
+      properties:
+        applicationId:
+          type: integer
+          format: int64
+          minimum: 1
+          example: 1
+          description: Id of application
+        requestedAmount:
+          type: number
+          format: double
+          minimum: 10000.00
+          description: Requested loan amount
+          example: 10000.00
+        totalAmount:
+          type: number
+          format: double
+          minimum: 10000.00
+          description: Total loan amount
+          example: 10150.00
+        term:
+          type: integer
+          minimum: 6
+          description: Loan term
+          example: 6
+        monthlyPayment:
+          type: number
+          format: double
+          description: Monthly payment
+          example: 1756.38
+        rate:
+          type: number
+          format: double
+          description: Rate
+          example: 13
+        isInsuranceEnabled:
+          type: boolean
+          description: Is insurance enabled
+          example: true
+        isSalaryClient:
+          type: boolean
+          description: Is salary client
+          example: true
+    Offers:
+      description: Four offers
+      type: array
+      maxItems: 4
+      items:
+        $ref: '#/components/schemas/LoanOfferDTO'
+    ScoringDataDTO:
+      description: Scoring data
+      type: object
+      x-class-extra-annotation: "@lombok.AllArgsConstructor @lombok.NoArgsConstructor"
+      properties:
+        amount:
+          type: number
+          format: double
+          minimum: 10000.00
+          description: Loan amount
+          example: 10000.00
+        term:
+          type: integer
+          minimum: 6
+          description: Loan term
+          example: 6
+        firstName:
+          type: string
+          pattern: '^[A-Za-z]{2,30}$'
+          description: First name
+          example: Ivan
+        lastName:
+          type: string
+          pattern: '^[A-Za-z]{2,30}$'
+          description: Last name
+          example: Ivanov
+        middleName:
+          type: string
+          pattern: '^[A-Za-z]{2,30}$'
+          description: Middle name
+          example: Ivanovich
+        gender:
+          $ref: '#/components/schemas/Gender'
+          description: Gender
+          example: MALE
+        birthdate:
+          type: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer.class)"
+          format: yyyy-mm-dd
+          description: Birthdate in YYYY-MM-DD format
+          example: 2000-01-01
+        passportSeries:
+          type: string
+          pattern: '^[0-9]{4}$'
+          description: Passport series
+          example: 1234
+        passportNumber:
+          type: string
+          pattern: '^[0-9]{6}$'
+          description: Passport number
+          example: 123456
+        passportIssueDate:
+          type: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer.class)"
+          format: yyyy-mm-dd
+          description: Passport issue date in YYYY-MM-DD format
+          example: 2014-01-01
+        passportIssueBranch:
+          type: string
+          pattern: '^[A-Za-z ]{2,50}$'
+          description: Passport issue branch
+          example: UFMS Moscow
+        maritalStatus:
+          $ref: '#/components/schemas/MaritalStatus'
+          description: Martial status
+          example: MARRIED
+        dependentAmount:
+          type: integer
+          minimum: 0
+          maximum: 20
+          description: Dependent amount
+          example: 1
+        employment:
+          $ref: '#/components/schemas/EmploymentDTO'
+        account:
+          type: string
+          pattern: '^\d{20}$'
+          description: Account
+          example: 01234567890123456789
+        isInsuranceEnabled:
+          type: boolean
+          description: Is insurance enabled
+          example: true
+        isSalaryClient:
+          type: boolean
+          description: Is salary client
+          example: true
+    CreditDTO:
+      description: Credit
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          minimum: 10000.00
+          description: Loan amount
+          example: 10000.00
+        term:
+          type: integer
+          minimum: 6
+          description: Loan term
+          example: 6
+        monthlyPayment:
+          type: number
+          format: double
+          description: Monthly payment
+          example: 1740.34
+        rate:
+          type: number
+          format: double
+          description: Rate
+          example: 15
+        psk:
+          type: number
+          format: double
+          description: PSK
+          example: 8.841
+        isInsuranceEnabled:
+          type: boolean
+          description: Is insurance enabled
+          example: false
+        isSalaryClient:
+          type: boolean
+          description: Is salary client
+          example: false
+        paymentSchedule:
+          description: Payment schedule
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentScheduleElement'
+    PaymentScheduleElement:
+      description: Payment schedule element
+      type: object
+      x-class-extra-annotation: "@lombok.AllArgsConstructor @lombok.NoArgsConstructor"
+      properties:
+        number:
+          type: integer
+          description: Number
+          example: 0
+        date:
+          type: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer.class)"
+          format: yyyy-mm-dd
+          description: Date in YYYY-MM-DD format
+          example: 2023-07-31
+        totalPayment:
+          type: number
+          format: double
+          description: Total payment
+          example: -10000.00
+        interestPayment:
+          type: number
+          format: double
+          description: Interest payment
+          example: 0
+        debtPayment:
+          type: number
+          format: double
+          description: Debt payment
+          example: 0
+        remainingDebt:
+          type: number
+          format: double
+          description: Remaining payment
+          example: 10000
+    FinishRegistrationRequestDTO:
+      description: Finish registration request
+      type: object
+      required:
+        - gender
+        - maritalStatus
+        - dependentAmount
+        - passportIssueDate
+        - passportIssueBranch
+        - employment
+        - account
+      properties:
+        gender:
+          $ref: '#/components/schemas/Gender'
+          description: Gender
+          example: MALE
+        maritalStatus:
+          $ref: '#/components/schemas/MaritalStatus'
+          description: Martial status
+          example: MARRIED
+        dependentAmount:
+          type: integer
+          minimum: 0
+          maximum: 20
+          description: Dependent amount
+          example: 1
+        passportIssueDate:
+          type: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer.class)"
+          format: yyyy-mm-dd
+          description: Passport issue date in YYYY-MM-DD format
+          example: 2014-01-01
+        passportIssueBranch:
+          type: string
+          pattern: '^[A-Za-z ]{2,50}$'
+          x-pattern-message: должно быть длиной от 2 до 50 латинских букв
+          description: Passport issue branch
+          example: UFMS Moscow
+        employment:
+          $ref: '#/components/schemas/EmploymentDTO'
+        account:
+          type: string
+          pattern: '^\d{20}$'
+          x-pattern-message: должно содержать 20 цифр
+          description: Account
+          example: 01234567890123456789
+    ApplicationStatusHistoryDTO:
+      required:
+        - status
+        - time
+        - changeType
+      description: Application status history
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ApplicationStatus'
+          description: Application status
+          example: PREAPPROVAL
+        time:
+          type: string
+          format: date-time
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.class)"
+          description: Time and date of the status change
+          example: 2017-07-21T17:32:28Z
+        changeType:
+          $ref: '#/components/schemas/ChangeType'
+          description: Change type
+          example: AUTOMATIC
+    EmploymentDTO:
+      description: User's employment data
+      type: object
+      required:
+        - employmentStatus
+        - employerINN
+        - salary
+        - position
+        - workExperienceTotal
+        - workExperienceCurrent
+      properties:
+        employmentStatus:
+          $ref: '#/components/schemas/EmploymentStatus'
+          description: Employment status
+          example: BUSINESS_OWNER
+        employerINN:
+          type: string
+          pattern: '^\d{10}$'
+          x-pattern-message: должно содержать 10 цифр
+          description: Employment INN
+          example: 0123456789
+        salary:
+          type: number
+          format: double
+          description: Salary
+          example: 10000
+        position:
+          $ref: '#/components/schemas/Position'
+          description: Position
+          example: MID_MANAGER
+        workExperienceTotal:
+          type: integer
+          description: Total work experience
+          example: 12
+        workExperienceCurrent:
+          type: integer
+          description: Current work experience
+          example: 3
+    Passport:
+      description: Passport
+      type: object
+      properties:
+        series:
+          type: string
+          description: Passport series
+          example: 1234
+        number:
+          type: string
+          description: Passport number
+          example: 123456
+        issueBranch:
+          type: string
+          description: Passport issue branch
+          example: UFMS Moscow
+        issueDate:
+          type: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer.class)"
+          format: yyyy-mm-dd
+          description: Passport issue date in YYYY-MM-DD format
+          example: 2014-01-01
+    ErrorResponse:
+      description: Error
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Message
+          example: amount must not be null
+    Errors:
+      description: Errors
+      type: array
+      items:
+        $ref: '#/components/schemas/ErrorResponse'
+    Gender:
+      description: Gender
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+        - NON_BINARY
+    MaritalStatus:
+      description: Martial status
+      type: string
+      enum:
+        - MARRIED
+        - DIVORCED
+        - SINGLE
+        - WIDOW_WIDOWER
+    EmploymentStatus:
+      description: Employment status
+      type: string
+      enum:
+        - UNEMPLOYED
+        - SELF_EMPLOYED
+        - EMPLOYED
+        - BUSINESS_OWNER
+    Position:
+      description: Position
+      type: string
+      enum:
+        - WORKER
+        - MID_MANAGER
+        - TOP_MANAGER
+        - OWNER
+    ApplicationStatus:
+      description: Application status
+      type: string
+      enum:
+        - PREAPPROVAL
+        - APPROVED
+        - CC_DENIED
+        - CC_APPROVED
+        - PREPARE_DOCUMENTS
+        - CLIENT_DENIED
+        - DOCUMENT_SIGNED
+        - CREDIT_ISSUED
+    ChangeType:
+      description: Change type
+      type: string
+      enum:
+        - AUTOMATIC
+        - MANUAL
+    CreditStatus:
+      description: Credit status
+      type: string
+      enum:
+        - CALCULATED
+        - ISSUED
