@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-application" author="Veronika Kulieva">
+        <createTable tableName="application">
+            <column name="application_id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="client_id" type="bigint"/>
+            <column name="credit_id" type="bigint"/>
+            <column name="status" type="varchar(17)"/>
+            <column name="creation_date" type="timestamp"/>
+            <column name="applied_offer" type="jsonb"/>
+            <column name="sign_date" type="timestamp"/>
+            <column name="ses_code" type="varchar(100)"/>
+            <column name="status_history" type="jsonb"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="application" baseColumnNames="client_id"
+                                 constraintName="application_client_id_client_client_id"
+                                 referencedTableName="client" referencedColumnNames="client_id" onDelete="SET NULL"/>
+
+        <addForeignKeyConstraint baseTableName="application" baseColumnNames="credit_id"
+                                 constraintName="application_credit_id_credit_credit_id"
+                                 referencedTableName="credit" referencedColumnNames="credit_id" onDelete="CASCADE"/>
+
+    </changeSet>
+
+</databaseChangeLog>
