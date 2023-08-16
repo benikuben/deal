@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 @Constraint(validatedBy = OverEighteenYearsOldValidator.class)
 @Past
 public @interface OverEighteenYearsOld {
-    String message() default "Возраст должен быть больше 18 лет";
+    String message() default "возраст должен быть больше 18 лет";
 
     Class<?>[] groups() default {};
 
