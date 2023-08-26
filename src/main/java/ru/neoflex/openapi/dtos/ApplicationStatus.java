@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Application status
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-13T21:43:13.391899+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
 public enum ApplicationStatus {
   
   PREAPPROVAL("PREAPPROVAL"),
@@ -33,6 +33,8 @@ public enum ApplicationStatus {
   CC_APPROVED("CC_APPROVED"),
   
   PREPARE_DOCUMENTS("PREPARE_DOCUMENTS"),
+  
+  DOCUMENT_CREATED("DOCUMENT_CREATED"),
   
   CLIENT_DENIED("CLIENT_DENIED"),
   

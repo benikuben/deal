@@ -1,11 +1,15 @@
-README.md
+src/main/java/ru/neoflex/openapi/controllers/AdminApi.java
 src/main/java/ru/neoflex/openapi/controllers/ApiUtil.java
 src/main/java/ru/neoflex/openapi/controllers/DealApi.java
+src/main/java/ru/neoflex/openapi/controllers/DocumentApi.java
+src/main/java/ru/neoflex/openapi/dtos/ApplicationDTO.java
 src/main/java/ru/neoflex/openapi/dtos/ApplicationStatus.java
 src/main/java/ru/neoflex/openapi/dtos/ApplicationStatusHistoryDTO.java
 src/main/java/ru/neoflex/openapi/dtos/ChangeType.java
+src/main/java/ru/neoflex/openapi/dtos/ClientDTO.java
 src/main/java/ru/neoflex/openapi/dtos/CreditDTO.java
 src/main/java/ru/neoflex/openapi/dtos/CreditStatus.java
+src/main/java/ru/neoflex/openapi/dtos/EmailMessage.java
 src/main/java/ru/neoflex/openapi/dtos/EmploymentDTO.java
 src/main/java/ru/neoflex/openapi/dtos/EmploymentStatus.java
 src/main/java/ru/neoflex/openapi/dtos/ErrorResponse.java
@@ -18,3 +22,4 @@ src/main/java/ru/neoflex/openapi/dtos/Passport.java
 src/main/java/ru/neoflex/openapi/dtos/PaymentScheduleElement.java
 src/main/java/ru/neoflex/openapi/dtos/Position.java
 src/main/java/ru/neoflex/openapi/dtos/ScoringDataDTO.java
+src/main/java/ru/neoflex/openapi/dtos/Theme.java

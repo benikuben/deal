@@ -25,8 +25,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "ScoringDataDTO", description = "Scoring data")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-13T21:43:13.391899+03:00[Europe/Moscow]")
-@lombok.AllArgsConstructor @lombok.NoArgsConstructor
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
 public class ScoringDataDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;

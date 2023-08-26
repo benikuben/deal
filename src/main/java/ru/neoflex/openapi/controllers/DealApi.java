@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-13T21:43:13.391899+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "deal", description = "the deal API")
 public interface DealApi {
@@ -49,14 +49,14 @@ public interface DealApi {
      *
      * @param loanOfferDTO  (required)
      * @return Offer applied (status code 200)
-     *         or Validation error (status code 400)
+     *         or Bad request (status code 400)
      */
     @Operation(
         operationId = "applyOffer",
         summary = "Choosing one of the offers",
         responses = {
             @ApiResponse(responseCode = "200", description = "Offer applied"),
-            @ApiResponse(responseCode = "400", description = "Validation error", content = {
+            @ApiResponse(responseCode = "400", description = "Bad request", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorResponse.class)))
             })
         }
@@ -85,7 +85,7 @@ public interface DealApi {
      *
      * @param loanApplicationRequestDTO  (required)
      * @return Application created (status code 200)
-     *         or Validation error (status code 400)
+     *         or Bad request (status code 400)
      */
     @Operation(
         operationId = "createApplication",
@@ -94,7 +94,7 @@ public interface DealApi {
             @ApiResponse(responseCode = "200", description = "Application created", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = LoanOfferDTO.class)))
             }),
-            @ApiResponse(responseCode = "400", description = "Validation error", content = {
+            @ApiResponse(responseCode = "400", description = "Bad request", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorResponse.class)))
             })
         }
@@ -133,14 +133,14 @@ public interface DealApi {
      * @param applicationId Id of application (required)
      * @param finishRegistrationRequestDTO  (required)
      * @return Application updated (status code 200)
-     *         or Validation error (status code 400)
+     *         or Bad request (status code 400)
      */
     @Operation(
         operationId = "finishRegistration",
         summary = "Completion of registration and full loan calculation",
         responses = {
             @ApiResponse(responseCode = "200", description = "Application updated"),
-            @ApiResponse(responseCode = "400", description = "Validation error", content = {
+            @ApiResponse(responseCode = "400", description = "Bad request", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorResponse.class)))
             })
         }

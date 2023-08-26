@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: Deal API
 servers:
-  - url: https://localhost:8080
+  - url: https://localhost:8082
     description: localhost
 paths:
   /deal/application:
@@ -24,7 +24,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Offers'
         '400':
-          description: Validation error
+          description: Bad request
           content:
             application/json:
               schema:
@@ -43,7 +43,7 @@ paths:
         '200':
           description: Offer applied
         '400':
-          description: Validation error
+          description: Bad request
           content:
             application/json:
               schema:
@@ -70,17 +70,111 @@ paths:
         '200':
           description: Application updated
         '400':
-          description: Validation error
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Errors'
+  /document/{applicationId}/send:
+    post:
+      summary: Request to send documents
+      operationId: sendDocuments
+      parameters:
+        - name: applicationId
+          in: path
+          description: Id of application
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Successfully sent
+  /document/{applicationId}/sign:
+    post:
+      summary: Request to sign documents
+      operationId: signDocuments
+      parameters:
+        - name: applicationId
+          in: path
+          description: Id of application
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Successfully sent
+  /document/{applicationId}/code:
+    post:
+      summary: Signing documents
+      operationId: verifyCode
+      parameters:
+        - name: applicationId
+          in: path
+          description: Id of application
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: integer
+              description: Ses code
+              example: 1234
+      responses:
+        '200':
+          description: Documents signed
+  /admin/application/{applicationId}:
+    get:
+      summary: Get application by id
+      operationId: getApplicationById
+      parameters:
+        - name: applicationId
+          in: path
+          description: Id of application
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '200':
+          description: Received application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDTO'
+  /admin/application/{applicationId}/status:
+    put:
+      summary: Update application status
+      operationId: updateApplicationStatus
+      parameters:
+        - name: applicationId
+          in: path
+          description: Id of application
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        required: true
+        content:
+          text/plain;charset=UTF-8:
+            schema:
+              type: string
+              description: New status
+              example: DOCUMENTS_CREATED
+      responses:
+        '200':
+          description: Successfully updated
 components:
   schemas:
     LoanApplicationRequestDTO:
       description: Loan application request
       type: object
-      x-class-extra-annotation: "@lombok.AllArgsConstructor"
       required:
         - amount
         - term
@@ -208,7 +302,6 @@ components:
     ScoringDataDTO:
       description: Scoring data
       type: object
-      x-class-extra-annotation: "@lombok.AllArgsConstructor @lombok.NoArgsConstructor"
       properties:
         amount:
           type: number
@@ -239,7 +332,6 @@ components:
         gender:
           $ref: '#/components/schemas/Gender'
           description: Gender
-          example: MALE
         birthdate:
           type: date
           x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
@@ -272,7 +364,6 @@ components:
         maritalStatus:
           $ref: '#/components/schemas/MaritalStatus'
           description: Martial status
-          example: MARRIED
         dependentAmount:
           type: integer
           minimum: 0
@@ -324,6 +415,11 @@ components:
           format: double
           description: PSK
           example: 8.841
+        paymentSchedule:
+          description: Payment schedule
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentScheduleElement'
         isInsuranceEnabled:
           type: boolean
           description: Is insurance enabled
@@ -332,15 +428,9 @@ components:
           type: boolean
           description: Is salary client
           example: false
-        paymentSchedule:
-          description: Payment schedule
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentScheduleElement'
     PaymentScheduleElement:
       description: Payment schedule element
       type: object
-      x-class-extra-annotation: "@lombok.AllArgsConstructor @lombok.NoArgsConstructor"
       properties:
         number:
           type: integer
@@ -388,11 +478,9 @@ components:
         gender:
           $ref: '#/components/schemas/Gender'
           description: Gender
-          example: MALE
         maritalStatus:
           $ref: '#/components/schemas/MaritalStatus'
           description: Martial status
-          example: MARRIED
         dependentAmount:
           type: integer
           minimum: 0
@@ -431,7 +519,6 @@ components:
         status:
           $ref: '#/components/schemas/ApplicationStatus'
           description: Application status
-          example: PREAPPROVAL
         time:
           type: string
           format: date-time
@@ -442,7 +529,6 @@ components:
         changeType:
           $ref: '#/components/schemas/ChangeType'
           description: Change type
-          example: AUTOMATIC
     EmploymentDTO:
       description: User's employment data
       type: object
@@ -457,7 +543,6 @@ components:
         employmentStatus:
           $ref: '#/components/schemas/EmploymentStatus'
           description: Employment status
-          example: BUSINESS_OWNER
         employerINN:
           type: string
           pattern: '^\d{10}$'
@@ -472,7 +557,6 @@ components:
         position:
           $ref: '#/components/schemas/Position'
           description: Position
-          example: MID_MANAGER
         workExperienceTotal:
           type: integer
           description: Total work experience
@@ -504,6 +588,99 @@ components:
           format: yyyy-mm-dd
           description: Passport issue date in YYYY-MM-DD format
           example: 2014-01-01
+    EmailMessage:
+      description: Email message
+      type: object
+      properties:
+        address:
+          type: string
+          description: Address
+          example: ivan@mail.ru
+        theme:
+          $ref: '#/components/schemas/Theme'
+          description: Theme
+        applicationId:
+          type: integer
+          format: int64
+          example: 1
+          description: Id of application
+    ClientDTO:
+      description: Client
+      type: object
+      properties:
+        lastName:
+          type: string
+          description: Last name
+          example: Ivanov
+        firstName:
+          type: string
+          description: First name
+          example: Ivan
+        middleName:
+          type: string
+          description: Middle name
+          example: Ivanovich
+        birthdate:
+          type: date
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer.class)"
+          format: yyyy-mm-dd
+          description: Birthdate in YYYY-MM-DD format
+          example: 2000-01-01
+        email:
+          type: string
+          x-pattern-message: должен быть введен корректный email
+          description: Email
+          example: ivan@mail.ru
+        gender:
+          $ref: '#/components/schemas/Gender'
+          description: Gender
+        maritalStatus:
+          $ref: '#/components/schemas/MaritalStatus'
+          description: Martial status
+        dependentAmount:
+          type: integer
+          minimum: 0
+          maximum: 20
+          description: Dependent amount
+          example: 1
+        passport:
+          $ref: '#/components/schemas/Passport'
+          description: Passport
+        employment:
+          $ref: '#/components/schemas/EmploymentDTO'
+        account:
+          type: string
+          description: Account
+          example: 01234567890123456789
+    ApplicationDTO:
+      description: Application
+      type: object
+      properties:
+        clientId:
+          $ref: '#/components/schemas/ClientDTO'
+        creditId:
+          $ref: '#/components/schemas/CreditDTO'
+        creationDate:
+          type: string
+          format: date-time
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.class)"
+          description: Time and date of the status change
+          example: 2017-07-21T17:32:28Z
+        appliedOffer:
+          $ref: '#/components/schemas/LoanOfferDTO'
+        signDate:
+          type: string
+          format: date-time
+          x-field-extra-annotation: "@com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer.class) 
+          @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.class)"
+          description: Time and date of the status change
+          example: 2017-07-21T17:32:28Z
+        sesCode:
+          type: string
+          description: Ses code
+          example: 1234
     ErrorResponse:
       description: Error
       type: object
@@ -538,9 +715,9 @@ components:
       description: Employment status
       type: string
       enum:
+        - EMPLOYED
         - UNEMPLOYED
         - SELF_EMPLOYED
-        - EMPLOYED
         - BUSINESS_OWNER
     Position:
       description: Position
@@ -559,6 +736,7 @@ components:
         - CC_DENIED
         - CC_APPROVED
         - PREPARE_DOCUMENTS
+        - DOCUMENT_CREATED
         - CLIENT_DENIED
         - DOCUMENT_SIGNED
         - CREDIT_ISSUED
@@ -574,3 +752,13 @@ components:
       enum:
         - CALCULATED
         - ISSUED
+    Theme:
+      description: Theme
+      type: string
+      enum:
+        - FINISH_REGISTRATION
+        - CREATE_DOCUMENTS
+        - SEND_DOCUMENTS
+        - SEND_SES
+        - CREDIT_ISSUED
+        - APPLICATION_DENIED

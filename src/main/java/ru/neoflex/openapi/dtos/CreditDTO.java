@@ -23,7 +23,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "CreditDTO", description = "Credit")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-13T21:43:13.391899+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
 public class CreditDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -38,12 +38,12 @@ public class CreditDTO implements Serializable {
 
   private java.math.BigDecimal psk;
 
+  @Valid
+  private List<@Valid PaymentScheduleElement> paymentSchedule;
+
   private Boolean isInsuranceEnabled;
 
   private Boolean isSalaryClient;
-
-  @Valid
-  private List<@Valid PaymentScheduleElement> paymentSchedule;
 
   public CreditDTO amount(java.math.BigDecimal amount) {
     this.amount = amount;
@@ -147,6 +147,34 @@ public class CreditDTO implements Serializable {
     this.psk = psk;
   }
 
+  public CreditDTO paymentSchedule(List<@Valid PaymentScheduleElement> paymentSchedule) {
+    this.paymentSchedule = paymentSchedule;
+    return this;
+  }
+
+  public CreditDTO addPaymentScheduleItem(PaymentScheduleElement paymentScheduleItem) {
+    if (this.paymentSchedule == null) {
+      this.paymentSchedule = new ArrayList<>();
+    }
+    this.paymentSchedule.add(paymentScheduleItem);
+    return this;
+  }
+
+  /**
+   * Payment schedule
+   * @return paymentSchedule
+  */
+  @Valid 
+  @Schema(name = "paymentSchedule", description = "Payment schedule", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("paymentSchedule")
+  public List<@Valid PaymentScheduleElement> getPaymentSchedule() {
+    return paymentSchedule;
+  }
+
+  public void setPaymentSchedule(List<@Valid PaymentScheduleElement> paymentSchedule) {
+    this.paymentSchedule = paymentSchedule;
+  }
+
   public CreditDTO isInsuranceEnabled(Boolean isInsuranceEnabled) {
     this.isInsuranceEnabled = isInsuranceEnabled;
     return this;
@@ -187,34 +215,6 @@ public class CreditDTO implements Serializable {
     this.isSalaryClient = isSalaryClient;
   }
 
-  public CreditDTO paymentSchedule(List<@Valid PaymentScheduleElement> paymentSchedule) {
-    this.paymentSchedule = paymentSchedule;
-    return this;
-  }
-
-  public CreditDTO addPaymentScheduleItem(PaymentScheduleElement paymentScheduleItem) {
-    if (this.paymentSchedule == null) {
-      this.paymentSchedule = new ArrayList<>();
-    }
-    this.paymentSchedule.add(paymentScheduleItem);
-    return this;
-  }
-
-  /**
-   * Payment schedule
-   * @return paymentSchedule
-  */
-  @Valid 
-  @Schema(name = "paymentSchedule", description = "Payment schedule", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("paymentSchedule")
-  public List<@Valid PaymentScheduleElement> getPaymentSchedule() {
-    return paymentSchedule;
-  }
-
-  public void setPaymentSchedule(List<@Valid PaymentScheduleElement> paymentSchedule) {
-    this.paymentSchedule = paymentSchedule;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -229,14 +229,14 @@ public class CreditDTO implements Serializable {
         Objects.equals(this.monthlyPayment, creditDTO.monthlyPayment) &&
         Objects.equals(this.rate, creditDTO.rate) &&
         Objects.equals(this.psk, creditDTO.psk) &&
+        Objects.equals(this.paymentSchedule, creditDTO.paymentSchedule) &&
         Objects.equals(this.isInsuranceEnabled, creditDTO.isInsuranceEnabled) &&
-        Objects.equals(this.isSalaryClient, creditDTO.isSalaryClient) &&
-        Objects.equals(this.paymentSchedule, creditDTO.paymentSchedule);
+        Objects.equals(this.isSalaryClient, creditDTO.isSalaryClient);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount, term, monthlyPayment, rate, psk, isInsuranceEnabled, isSalaryClient, paymentSchedule);
+    return Objects.hash(amount, term, monthlyPayment, rate, psk, paymentSchedule, isInsuranceEnabled, isSalaryClient);
   }
 
   @Override
@@ -248,9 +248,9 @@ public class CreditDTO implements Serializable {
     sb.append("    monthlyPayment: ").append(toIndentedString(monthlyPayment)).append("\n");
     sb.append("    rate: ").append(toIndentedString(rate)).append("\n");
     sb.append("    psk: ").append(toIndentedString(psk)).append("\n");
+    sb.append("    paymentSchedule: ").append(toIndentedString(paymentSchedule)).append("\n");
     sb.append("    isInsuranceEnabled: ").append(toIndentedString(isInsuranceEnabled)).append("\n");
     sb.append("    isSalaryClient: ").append(toIndentedString(isSalaryClient)).append("\n");
-    sb.append("    paymentSchedule: ").append(toIndentedString(paymentSchedule)).append("\n");
     sb.append("}");
     return sb.toString();
   }

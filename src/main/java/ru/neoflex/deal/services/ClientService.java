@@ -28,7 +28,7 @@ public class ClientService {
         if (optionalClient.isPresent()) {
             log.info("Client with passport {} {} has already been saved in the database", client.getPassport().getSeries(), client.getPassport().getNumber());
             clientToSave = optionalClient.get();
-            if (!clientToSave.getEmail().equals(client.getEmail())){
+            if (!clientToSave.getEmail().equals(client.getEmail())) {
                 clientToSave.setEmail(client.getEmail());
                 log.info("Email of client with passport {} {} was updated to {}", clientToSave.getPassport().getSeries(), clientToSave.getPassport().getNumber(), clientToSave.getEmail());
             }
@@ -39,8 +39,8 @@ public class ClientService {
         return clientRepository.save(clientToSave);
     }
 
-//    @Transactional
-//    public Client update(Client client) {
-//        return clientRepository.save(client);
-//    }
+    @Transactional
+    public Client update(Client client) {
+        return clientRepository.save(client);
+    }
 }

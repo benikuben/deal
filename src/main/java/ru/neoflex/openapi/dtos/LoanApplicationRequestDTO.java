@@ -5,8 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.time.LocalDate;
-
-import lombok.NoArgsConstructor;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
@@ -23,8 +21,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "LoanApplicationRequestDTO", description = "Loan application request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-13T21:43:13.391899+03:00[Europe/Moscow]")
-@lombok.AllArgsConstructor
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
 public class LoanApplicationRequestDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;

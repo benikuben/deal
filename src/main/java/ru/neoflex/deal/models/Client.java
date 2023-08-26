@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString(exclude = "applications")
 public class Client {
     @Id
     @Column(name = "client_id")
@@ -64,6 +65,5 @@ public class Client {
     private String account;
 
     @OneToMany(mappedBy = "clientId")
-//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Application> applications;
 }

@@ -34,13 +34,7 @@ class CreditServiceTest {
         BigDecimal amount = BigDecimal.valueOf(10000);
         BigDecimal monthlyPayment = BigDecimal.valueOf(1740.34);
         List<PaymentScheduleElement> payments = List.of(
-//                new PaymentScheduleElement(0, LocalDate.of(2000, 1, 1), amount.negate(), BigDecimal.ZERO, BigDecimal.ZERO, amount),
-//                new PaymentScheduleElement(1, LocalDate.of(2000, 2, 1), monthlyPayment, BigDecimal.valueOf(141.67), BigDecimal.valueOf(1608.60), BigDecimal.valueOf(8391.40)),
-//                new PaymentScheduleElement(2, LocalDate.of(2000, 3, 1), monthlyPayment, BigDecimal.valueOf(118.88), BigDecimal.valueOf(1608.60), BigDecimal.valueOf(8391.40)),
-//                new PaymentScheduleElement(3, LocalDate.of(2000, 4, 1), monthlyPayment, BigDecimal.valueOf(95.77), BigDecimal.valueOf(1654.50), BigDecimal.valueOf(5105.51)),
-//                new PaymentScheduleElement(4, LocalDate.of(2000, 5, 1), monthlyPayment, BigDecimal.valueOf(72.33), BigDecimal.valueOf(1677.94), BigDecimal.valueOf(3427.57)),
-//                new PaymentScheduleElement(5, LocalDate.of(2000, 6, 1), monthlyPayment, BigDecimal.valueOf(48.56), BigDecimal.valueOf(1701.71), BigDecimal.valueOf(1725.86)),
-                new PaymentScheduleElement(6, LocalDate.of(2000, 7, 1), monthlyPayment, BigDecimal.valueOf(24.45), BigDecimal.valueOf(1725.82), BigDecimal.valueOf(0.04))
+                new PaymentScheduleElement().number(1).date(LocalDate.of(2000, 7, 1)).totalPayment(amount.negate()).interestPayment(BigDecimal.ZERO).debtPayment(BigDecimal.ZERO).remainingDebt(amount)
         );
         Credit credit = Credit.builder()
                 .amount(amount)
@@ -65,16 +59,16 @@ class CreditServiceTest {
         Credit actualCredit = creditService.save(credit);
 
         //tests
-        assertEquals(actualCredit.getId(), actualCredit.getId());
-        assertEquals(actualCredit.getAmount(), actualCredit.getAmount());
-        assertEquals(actualCredit.getTerm(), actualCredit.getTerm());
-        assertEquals(actualCredit.getMonthlyPayment(), actualCredit.getMonthlyPayment());
-        assertEquals(actualCredit.getRate(), actualCredit.getRate());
-        assertEquals(actualCredit.getPsk(), actualCredit.getPsk());
-        assertEquals(actualCredit.getPaymentSchedule(), actualCredit.getPaymentSchedule());
-        assertEquals(actualCredit.getIsInsuranceEnabled(), actualCredit.getIsInsuranceEnabled());
-        assertEquals(actualCredit.getIsSalaryClient(), actualCredit.getIsSalaryClient());
-        assertEquals(actualCredit.getCreditStatus(), actualCredit.getCreditStatus());
-        assertEquals(actualCredit.getApplication().getId(), actualCredit.getApplication().getId());
+        assertEquals(actualCredit.getId(), expectedCredit.getId());
+        assertEquals(actualCredit.getAmount(), expectedCredit.getAmount());
+        assertEquals(actualCredit.getTerm(), expectedCredit.getTerm());
+        assertEquals(actualCredit.getMonthlyPayment(), expectedCredit.getMonthlyPayment());
+        assertEquals(actualCredit.getRate(), expectedCredit.getRate());
+        assertEquals(actualCredit.getPsk(), expectedCredit.getPsk());
+        assertEquals(actualCredit.getPaymentSchedule(), expectedCredit.getPaymentSchedule());
+        assertEquals(actualCredit.getIsInsuranceEnabled(), expectedCredit.getIsInsuranceEnabled());
+        assertEquals(actualCredit.getIsSalaryClient(), expectedCredit.getIsSalaryClient());
+        assertEquals(actualCredit.getCreditStatus(), expectedCredit.getCreditStatus());
+        assertEquals(actualCredit.getApplication().getId(), expectedCredit.getApplication().getId());
     }
 }

@@ -21,14 +21,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Employment status
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-13T21:43:13.391899+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
 public enum EmploymentStatus {
+  
+  EMPLOYED("EMPLOYED"),
   
   UNEMPLOYED("UNEMPLOYED"),
   
   SELF_EMPLOYED("SELF_EMPLOYED"),
-  
-  EMPLOYED("EMPLOYED"),
   
   BUSINESS_OWNER("BUSINESS_OWNER");
 

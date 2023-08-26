@@ -18,19 +18,27 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Credit status
+ * Theme
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public enum CreditStatus {
+public enum Theme {
   
-  CALCULATED("CALCULATED"),
+  FINISH_REGISTRATION("FINISH_REGISTRATION"),
   
-  ISSUED("ISSUED");
+  CREATE_DOCUMENTS("CREATE_DOCUMENTS"),
+  
+  SEND_DOCUMENTS("SEND_DOCUMENTS"),
+  
+  SEND_SES("SEND_SES"),
+  
+  CREDIT_ISSUED("CREDIT_ISSUED"),
+  
+  APPLICATION_DENIED("APPLICATION_DENIED");
 
   private String value;
 
-  CreditStatus(String value) {
+  Theme(String value) {
     this.value = value;
   }
 
@@ -45,8 +53,8 @@ public enum CreditStatus {
   }
 
   @JsonCreator
-  public static CreditStatus fromValue(String value) {
-    for (CreditStatus b : CreditStatus.values()) {
+  public static Theme fromValue(String value) {
+    for (Theme b : Theme.values()) {
       if (b.value.equals(value)) {
         return b;
       }

@@ -19,22 +19,18 @@ import java.util.Objects;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString
 public class Application {
     @Id
     @Column(name = "application_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "client_id")
     private Client clientId;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "credit_id", referencedColumnName = "credit_id")
     private Credit creditId;
 
@@ -66,5 +62,10 @@ public class Application {
         if (this == o) return true;
         if (!(o instanceof Application that)) return false;
         return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

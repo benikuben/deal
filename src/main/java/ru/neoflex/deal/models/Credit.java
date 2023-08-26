@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString(exclude = "application")
 public class Credit {
     @Id
     @Column(name = "credit_id")
@@ -54,5 +55,4 @@ public class Credit {
 
     @OneToOne(mappedBy = "creditId")
     private Application application;
-
 }
