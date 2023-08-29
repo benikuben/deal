@@ -22,9 +22,9 @@ import jakarta.annotation.Generated;
  * User&#39;s employment data
  */
 
-@Schema(name = "EmploymentDTO", description = "User's employment data")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public class EmploymentDTO implements Serializable {
+@Schema(name = "Employment", description = "User's employment data")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+public class Employment implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -42,17 +42,17 @@ public class EmploymentDTO implements Serializable {
 
   /**
    * Default constructor
-   * @deprecated Use {@link EmploymentDTO#EmploymentDTO(EmploymentStatus, String, java.math.BigDecimal, Position, Integer, Integer)}
+   * @deprecated Use {@link Employment#Employment(EmploymentStatus, String, java.math.BigDecimal, Position, Integer, Integer)}
    */
   @Deprecated
-  public EmploymentDTO() {
+  public Employment() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public EmploymentDTO(EmploymentStatus employmentStatus, String employerINN, java.math.BigDecimal salary, Position position, Integer workExperienceTotal, Integer workExperienceCurrent) {
+  public Employment(EmploymentStatus employmentStatus, String employerINN, java.math.BigDecimal salary, Position position, Integer workExperienceTotal, Integer workExperienceCurrent) {
     this.employmentStatus = employmentStatus;
     this.employerINN = employerINN;
     this.salary = salary;
@@ -61,7 +61,7 @@ public class EmploymentDTO implements Serializable {
     this.workExperienceCurrent = workExperienceCurrent;
   }
 
-  public EmploymentDTO employmentStatus(EmploymentStatus employmentStatus) {
+  public Employment employmentStatus(EmploymentStatus employmentStatus) {
     this.employmentStatus = employmentStatus;
     return this;
   }
@@ -81,7 +81,7 @@ public class EmploymentDTO implements Serializable {
     this.employmentStatus = employmentStatus;
   }
 
-  public EmploymentDTO employerINN(String employerINN) {
+  public Employment employerINN(String employerINN) {
     this.employerINN = employerINN;
     return this;
   }
@@ -101,7 +101,7 @@ public class EmploymentDTO implements Serializable {
     this.employerINN = employerINN;
   }
 
-  public EmploymentDTO salary(java.math.BigDecimal salary) {
+  public Employment salary(java.math.BigDecimal salary) {
     this.salary = salary;
     return this;
   }
@@ -121,7 +121,7 @@ public class EmploymentDTO implements Serializable {
     this.salary = salary;
   }
 
-  public EmploymentDTO position(Position position) {
+  public Employment position(Position position) {
     this.position = position;
     return this;
   }
@@ -141,7 +141,7 @@ public class EmploymentDTO implements Serializable {
     this.position = position;
   }
 
-  public EmploymentDTO workExperienceTotal(Integer workExperienceTotal) {
+  public Employment workExperienceTotal(Integer workExperienceTotal) {
     this.workExperienceTotal = workExperienceTotal;
     return this;
   }
@@ -161,7 +161,7 @@ public class EmploymentDTO implements Serializable {
     this.workExperienceTotal = workExperienceTotal;
   }
 
-  public EmploymentDTO workExperienceCurrent(Integer workExperienceCurrent) {
+  public Employment workExperienceCurrent(Integer workExperienceCurrent) {
     this.workExperienceCurrent = workExperienceCurrent;
     return this;
   }
@@ -189,13 +189,13 @@ public class EmploymentDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmploymentDTO employmentDTO = (EmploymentDTO) o;
-    return Objects.equals(this.employmentStatus, employmentDTO.employmentStatus) &&
-        Objects.equals(this.employerINN, employmentDTO.employerINN) &&
-        Objects.equals(this.salary, employmentDTO.salary) &&
-        Objects.equals(this.position, employmentDTO.position) &&
-        Objects.equals(this.workExperienceTotal, employmentDTO.workExperienceTotal) &&
-        Objects.equals(this.workExperienceCurrent, employmentDTO.workExperienceCurrent);
+    Employment employment = (Employment) o;
+    return Objects.equals(this.employmentStatus, employment.employmentStatus) &&
+        Objects.equals(this.employerINN, employment.employerINN) &&
+        Objects.equals(this.salary, employment.salary) &&
+        Objects.equals(this.position, employment.position) &&
+        Objects.equals(this.workExperienceTotal, employment.workExperienceTotal) &&
+        Objects.equals(this.workExperienceCurrent, employment.workExperienceCurrent);
   }
 
   @Override
@@ -206,7 +206,7 @@ public class EmploymentDTO implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmploymentDTO {\n");
+    sb.append("class Employment {\n");
     sb.append("    employmentStatus: ").append(toIndentedString(employmentStatus)).append("\n");
     sb.append("    employerINN: ").append(toIndentedString(employerINN)).append("\n");
     sb.append("    salary: ").append(toIndentedString(salary)).append("\n");

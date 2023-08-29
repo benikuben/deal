@@ -24,7 +24,6 @@ class ClientServiceTest {
 
     @InjectMocks
     private ClientService clientService;
-    ;
 
     @Test
     void save() {

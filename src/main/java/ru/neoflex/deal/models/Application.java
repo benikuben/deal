@@ -5,21 +5,19 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import ru.neoflex.openapi.dtos.ApplicationStatus;
-import ru.neoflex.openapi.dtos.ApplicationStatusHistoryDTO;
-import ru.neoflex.openapi.dtos.LoanOfferDTO;
+import ru.neoflex.openapi.dtos.ApplicationStatusHistory;
+import ru.neoflex.openapi.dtos.LoanOffer;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "application")
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@ToString
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode(of = {"id"})
 public class Application {
     @Id
     @Column(name = "application_id")
@@ -44,7 +42,7 @@ public class Application {
 
     @Column(name = "applied_offer")
     @JdbcTypeCode(SqlTypes.JSON)
-    private LoanOfferDTO appliedOffer;
+    private LoanOffer appliedOffer;
 
     @Column(name = "sign_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,17 +53,5 @@ public class Application {
 
     @Column(name = "status_history")
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<ApplicationStatusHistoryDTO> statusHistory;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Application that)) return false;
-        return Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
+    private List<ApplicationStatusHistory> statusHistory;
 }

@@ -13,10 +13,10 @@ import java.util.List;
 @Entity
 @Table(name = "credit")
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode(of = {"id"})
 @ToString(exclude = "application")
 public class Credit {
     @Id

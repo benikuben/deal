@@ -4,18 +4,18 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.neoflex.openapi.dtos.CreditDTO;
-import ru.neoflex.openapi.dtos.LoanApplicationRequestDTO;
-import ru.neoflex.openapi.dtos.LoanOfferDTO;
-import ru.neoflex.openapi.dtos.ScoringDataDTO;
+import ru.neoflex.openapi.dtos.Credit;
+import ru.neoflex.openapi.dtos.LoanApplicationRequest;
+import ru.neoflex.openapi.dtos.LoanOffer;
+import ru.neoflex.openapi.dtos.ScoringData;
 
 import java.util.List;
 
-@FeignClient(name = "conveyor", url = "http://localhost:8081", path = "/conveyor")
+@FeignClient(name = "conveyor", url = "${conveyor.url}", path = "/conveyor")
 public interface ConveyorClient {
     @PostMapping("/offers")
-    ResponseEntity<List<LoanOfferDTO>> generateOffers(@RequestBody LoanApplicationRequestDTO request);
+    ResponseEntity<List<LoanOffer>> generateOffers(@RequestBody LoanApplicationRequest request);
 
     @PostMapping("/calculation")
-    ResponseEntity<CreditDTO> generateCredit(@RequestBody ScoringDataDTO request);
+    ResponseEntity<Credit> generateCredit(@RequestBody ScoringData request);
 }

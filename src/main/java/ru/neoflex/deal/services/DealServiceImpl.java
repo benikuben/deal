@@ -8,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ru.neoflex.deal.exceptions.DealException;
 import ru.neoflex.deal.feignclient.ConveyorClient;
 import ru.neoflex.deal.models.Application;
 import ru.neoflex.deal.models.Client;
-import ru.neoflex.deal.models.Credit;
-import ru.neoflex.deal.util.exceptions.ApplicationStatusException;
+import ru.neoflex.deal.exceptions.ApplicationStatusException;
 import ru.neoflex.deal.util.mappers.ClientMapper;
 import ru.neoflex.deal.util.mappers.CreditMapper;
 import ru.neoflex.openapi.dtos.*;
@@ -40,7 +40,7 @@ public class DealServiceImpl implements DealService {
      * Отправляется POST запрос на /conveyor/offers МС conveyor через FeignClient.
      * Каждому элементу из списка List<LoanOfferDTO> присваивается id созданной заявки (Application)
      */
-    public List<LoanOfferDTO> createApplication(LoanApplicationRequestDTO request) {
+    public List<LoanOffer> createApplication(LoanApplicationRequest request) {
         log.info("LoanApplicationRequestDTO - {}", request);
         Client client = clientMapper.loanApplicationRequestDTOToClient(request);
 
@@ -56,7 +56,7 @@ public class DealServiceImpl implements DealService {
         log.info("Application - {}", application);
 
         log.info("Sending request to /conveyor/offers. Generating offers for application with id - {}", application.getId());
-        List<LoanOfferDTO> offers = conveyorClient.generateOffers(request).getBody();
+        List<LoanOffer> offers = conveyorClient.generateOffers(request).getBody();
         long id = application.getId();
         offers.forEach(offer -> offer.setApplicationId(id));
         log.info("Generated offers - {}", offers);
@@ -70,12 +70,12 @@ public class DealServiceImpl implements DealService {
      * принятое предложение LoanOfferDTO устанавливается в поле appliedOffer.
      * Заявка сохраняется.
      */
-    public void applyOffer(LoanOfferDTO loanOfferDTO) {
+    public void applyOffer(LoanOffer loanOfferDTO) {
         log.info("Search application with id - {} in database", loanOfferDTO.getApplicationId());
         Application application = applicationService.findById(loanOfferDTO.getApplicationId());
 
         if (!application.getStatus().equals(ApplicationStatus.PREAPPROVAL)) {
-            log.info("ApplicationStatusException when updating status to APPROVED. Expected status before the update - PREAPPROVAL, actual - {}", application.getStatus());
+            log.warn("ApplicationStatusException when updating status to APPROVED. Expected status before the update - PREAPPROVAL, actual - {}", application.getStatus());
             throw new ApplicationStatusException();
         }
 
@@ -101,12 +101,12 @@ public class DealServiceImpl implements DealService {
      * ScoringDataDTO насыщается информацией из FinishRegistrationRequestDTO и Client, который хранится в Application
      * Отправляется POST запрос к МС КК с телом ScoringDataDTO
      */
-    public void finishRegistration(Long applicationId, FinishRegistrationRequestDTO finishRegistrationRequestDTO) {
+    public void finishRegistration(Long applicationId, FinishRegistrationRequest finishRegistrationRequestDTO) {
         Application application = applicationService.findById(applicationId);
         log.info("Application with id {} was found in database", applicationId);
 
         if (!application.getStatus().equals(ApplicationStatus.APPROVED)) {
-            log.info("ApplicationStatusException when updating status to CC_APPROVED or CC_DENIED. Expected status before the update - APPROVED, actual - {}", application.getStatus());
+            log.warn("ApplicationStatusException when updating status to CC_APPROVED or CC_DENIED. Expected status before the update - APPROVED, actual - {}", application.getStatus());
             throw new ApplicationStatusException();
         }
 
@@ -118,7 +118,7 @@ public class DealServiceImpl implements DealService {
         clientService.update(client);
         log.info("Client was updated in database - {}", client);
 
-        ScoringDataDTO data = new ScoringDataDTO();
+        ScoringData data = new ScoringData();
         BeanUtils.copyProperties(client, data);
         BeanUtils.copyProperties(application.getAppliedOffer(), data);
         data.passportIssueBranch(passport.getIssueBranch())
@@ -130,12 +130,12 @@ public class DealServiceImpl implements DealService {
 
         try {
             log.info("Sending request to /conveyor/calculation. Generating credit for application with id - {}", application.getId());
-            ResponseEntity<CreditDTO> creditDTO = conveyorClient.generateCredit(data);
+            ResponseEntity<Credit> creditDTO = conveyorClient.generateCredit(data);
 
             updateStatus(application, ApplicationStatus.CC_APPROVED, ChangeType.AUTOMATIC);
             log.info("Application status was updated to CC_APPROVED");
 
-            Credit credit = creditMapper.creditDTOToCredit(creditDTO.getBody());
+            ru.neoflex.deal.models.Credit credit = creditMapper.creditDTOToCredit(creditDTO.getBody());
             log.info("Calculated credit - {}", credit);
 
             credit.setCreditStatus(CreditStatus.CALCULATED);
@@ -161,7 +161,7 @@ public class DealServiceImpl implements DealService {
                     response = new ObjectMapper().readValue(e.contentUTF8(), ErrorResponse.class);
                 } catch (JsonProcessingException ex) {
                     log.warn("JsonProcessingException {}", ex.getMessage());
-                    throw new RuntimeException(ex);
+                    throw new DealException();
                 }
                 if (response.equals(LOAN_REJECTION)) {
                     updateStatus(application, ApplicationStatus.CC_DENIED, ChangeType.AUTOMATIC);
@@ -182,10 +182,10 @@ public class DealServiceImpl implements DealService {
 
     public static void updateStatus(Application application, ApplicationStatus status, ChangeType type) {
         application.setStatus(status);
-        List<ApplicationStatusHistoryDTO> history = application.getStatusHistory();
+        List<ApplicationStatusHistory> history = application.getStatusHistory();
         if (history == null)
             history = new ArrayList<>();
-        history.add(new ApplicationStatusHistoryDTO(status, LocalDateTime.now(), type));
+        history.add(new ApplicationStatusHistory(status, LocalDateTime.now(), type));
         application.setStatusHistory(history);
     }
 }

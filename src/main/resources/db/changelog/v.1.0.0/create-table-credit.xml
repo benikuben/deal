@@ -19,6 +19,10 @@
             <column name="salary_client" type="boolean"/>
             <column name="credit_status" type="varchar(10)"/>
         </createTable>
+
+        <rollback>
+            <dropTable tableName="credit"/>
+        </rollback>
     </changeSet>
 
 </databaseChangeLog>

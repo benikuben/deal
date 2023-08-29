@@ -15,7 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LoanApplicationRequestDTO'
+              $ref: '#/components/schemas/LoanApplicationRequest'
       responses:
         '200':
           description: Application created
@@ -38,7 +38,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LoanOfferDTO'
+              $ref: '#/components/schemas/LoanOffer'
       responses:
         '200':
           description: Offer applied
@@ -65,7 +65,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FinishRegistrationRequestDTO'
+              $ref: '#/components/schemas/FinishRegistrationRequest'
       responses:
         '200':
           description: Application updated
@@ -146,7 +146,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApplicationDTO'
+                $ref: '#/components/schemas/Application'
   /admin/application/{applicationId}/status:
     put:
       summary: Update application status
@@ -172,7 +172,7 @@ paths:
           description: Successfully updated
 components:
   schemas:
-    LoanApplicationRequestDTO:
+    LoanApplicationRequest:
       description: Loan application request
       type: object
       required:
@@ -239,7 +239,7 @@ components:
           x-pattern-message: должно содержать 6 цифр
           description: Passport number
           example: 123456
-    LoanOfferDTO:
+    LoanOffer:
       description: Loan offer
       type: object
       required:
@@ -298,8 +298,8 @@ components:
       type: array
       maxItems: 4
       items:
-        $ref: '#/components/schemas/LoanOfferDTO'
-    ScoringDataDTO:
+        $ref: '#/components/schemas/LoanOffer'
+    ScoringData:
       description: Scoring data
       type: object
       properties:
@@ -371,7 +371,7 @@ components:
           description: Dependent amount
           example: 1
         employment:
-          $ref: '#/components/schemas/EmploymentDTO'
+          $ref: '#/components/schemas/Employment'
         account:
           type: string
           pattern: '^\d{20}$'
@@ -385,7 +385,7 @@ components:
           type: boolean
           description: Is salary client
           example: true
-    CreditDTO:
+    Credit:
       description: Credit
       type: object
       properties:
@@ -463,7 +463,7 @@ components:
           format: double
           description: Remaining payment
           example: 10000
-    FinishRegistrationRequestDTO:
+    FinishRegistrationRequest:
       description: Finish registration request
       type: object
       required:
@@ -501,14 +501,14 @@ components:
           description: Passport issue branch
           example: UFMS Moscow
         employment:
-          $ref: '#/components/schemas/EmploymentDTO'
+          $ref: '#/components/schemas/Employment'
         account:
           type: string
           pattern: '^\d{20}$'
           x-pattern-message: должно содержать 20 цифр
           description: Account
           example: 01234567890123456789
-    ApplicationStatusHistoryDTO:
+    ApplicationStatusHistory:
       required:
         - status
         - time
@@ -529,7 +529,7 @@ components:
         changeType:
           $ref: '#/components/schemas/ChangeType'
           description: Change type
-    EmploymentDTO:
+    Employment:
       description: User's employment data
       type: object
       required:
@@ -604,7 +604,7 @@ components:
           format: int64
           example: 1
           description: Id of application
-    ClientDTO:
+    Client:
       description: Client
       type: object
       properties:
@@ -648,19 +648,19 @@ components:
           $ref: '#/components/schemas/Passport'
           description: Passport
         employment:
-          $ref: '#/components/schemas/EmploymentDTO'
+          $ref: '#/components/schemas/Employment'
         account:
           type: string
           description: Account
           example: 01234567890123456789
-    ApplicationDTO:
+    Application:
       description: Application
       type: object
       properties:
         clientId:
-          $ref: '#/components/schemas/ClientDTO'
+          $ref: '#/components/schemas/Client'
         creditId:
-          $ref: '#/components/schemas/CreditDTO'
+          $ref: '#/components/schemas/Credit'
         creationDate:
           type: string
           format: date-time
@@ -669,7 +669,7 @@ components:
           description: Time and date of the status change
           example: 2017-07-21T17:32:28Z
         appliedOffer:
-          $ref: '#/components/schemas/LoanOfferDTO'
+          $ref: '#/components/schemas/LoanOffer'
         signDate:
           type: string
           format: date-time

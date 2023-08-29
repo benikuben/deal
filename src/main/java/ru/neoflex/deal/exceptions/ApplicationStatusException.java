@@ -1,4 +1,4 @@
-package ru.neoflex.deal.util.exceptions;
+package ru.neoflex.deal.exceptions;
 
 public class ApplicationStatusException extends RuntimeException {
     public ApplicationStatusException() {

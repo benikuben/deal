@@ -27,7 +27,7 @@ class ClientMapperTest {
 
     @Test
     void loanApplicationRequestDTOToClient() {
-        LoanApplicationRequestDTO request = new LoanApplicationRequestDTO()
+        LoanApplicationRequest request = new LoanApplicationRequest()
                 .firstName("Ivan")
                 .lastName("Ivanov")
                 .middleName("Ivanovich")
@@ -65,7 +65,7 @@ class ClientMapperTest {
 
     @Test
     void passportSeriesAndNumberToPassport() {
-        LoanApplicationRequestDTO request = new LoanApplicationRequestDTO()
+        LoanApplicationRequest request = new LoanApplicationRequest()
                 .passportSeries("1234")
                 .passportNumber("123456");
 

@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.time.LocalDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.neoflex.openapi.dtos.ClientDTO;
-import ru.neoflex.openapi.dtos.CreditDTO;
-import ru.neoflex.openapi.dtos.LoanOfferDTO;
+import ru.neoflex.openapi.dtos.Client;
+import ru.neoflex.openapi.dtos.Credit;
+import ru.neoflex.openapi.dtos.LoanOffer;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
@@ -24,21 +24,21 @@ import jakarta.annotation.Generated;
  * Application
  */
 
-@Schema(name = "ApplicationDTO", description = "Application")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public class ApplicationDTO implements Serializable {
+@Schema(name = "Application", description = "Application")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+public class Application implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private ClientDTO clientId;
+  private Client clientId;
 
-  private CreditDTO creditId;
+  private Credit creditId;
 
   @com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer.class) @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.class)
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime creationDate;
 
-  private LoanOfferDTO appliedOffer;
+  private LoanOffer appliedOffer;
 
   @com.fasterxml.jackson.databind.annotation.JsonSerialize(using = com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer.class) @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.class)
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -46,7 +46,7 @@ public class ApplicationDTO implements Serializable {
 
   private String sesCode;
 
-  public ApplicationDTO clientId(ClientDTO clientId) {
+  public Application clientId(Client clientId) {
     this.clientId = clientId;
     return this;
   }
@@ -58,15 +58,15 @@ public class ApplicationDTO implements Serializable {
   @Valid 
   @Schema(name = "clientId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("clientId")
-  public ClientDTO getClientId() {
+  public Client getClientId() {
     return clientId;
   }
 
-  public void setClientId(ClientDTO clientId) {
+  public void setClientId(Client clientId) {
     this.clientId = clientId;
   }
 
-  public ApplicationDTO creditId(CreditDTO creditId) {
+  public Application creditId(Credit creditId) {
     this.creditId = creditId;
     return this;
   }
@@ -78,15 +78,15 @@ public class ApplicationDTO implements Serializable {
   @Valid 
   @Schema(name = "creditId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("creditId")
-  public CreditDTO getCreditId() {
+  public Credit getCreditId() {
     return creditId;
   }
 
-  public void setCreditId(CreditDTO creditId) {
+  public void setCreditId(Credit creditId) {
     this.creditId = creditId;
   }
 
-  public ApplicationDTO creationDate(LocalDateTime creationDate) {
+  public Application creationDate(LocalDateTime creationDate) {
     this.creationDate = creationDate;
     return this;
   }
@@ -106,7 +106,7 @@ public class ApplicationDTO implements Serializable {
     this.creationDate = creationDate;
   }
 
-  public ApplicationDTO appliedOffer(LoanOfferDTO appliedOffer) {
+  public Application appliedOffer(LoanOffer appliedOffer) {
     this.appliedOffer = appliedOffer;
     return this;
   }
@@ -118,15 +118,15 @@ public class ApplicationDTO implements Serializable {
   @Valid 
   @Schema(name = "appliedOffer", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("appliedOffer")
-  public LoanOfferDTO getAppliedOffer() {
+  public LoanOffer getAppliedOffer() {
     return appliedOffer;
   }
 
-  public void setAppliedOffer(LoanOfferDTO appliedOffer) {
+  public void setAppliedOffer(LoanOffer appliedOffer) {
     this.appliedOffer = appliedOffer;
   }
 
-  public ApplicationDTO signDate(LocalDateTime signDate) {
+  public Application signDate(LocalDateTime signDate) {
     this.signDate = signDate;
     return this;
   }
@@ -146,7 +146,7 @@ public class ApplicationDTO implements Serializable {
     this.signDate = signDate;
   }
 
-  public ApplicationDTO sesCode(String sesCode) {
+  public Application sesCode(String sesCode) {
     this.sesCode = sesCode;
     return this;
   }
@@ -174,13 +174,13 @@ public class ApplicationDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ApplicationDTO applicationDTO = (ApplicationDTO) o;
-    return Objects.equals(this.clientId, applicationDTO.clientId) &&
-        Objects.equals(this.creditId, applicationDTO.creditId) &&
-        Objects.equals(this.creationDate, applicationDTO.creationDate) &&
-        Objects.equals(this.appliedOffer, applicationDTO.appliedOffer) &&
-        Objects.equals(this.signDate, applicationDTO.signDate) &&
-        Objects.equals(this.sesCode, applicationDTO.sesCode);
+    Application application = (Application) o;
+    return Objects.equals(this.clientId, application.clientId) &&
+        Objects.equals(this.creditId, application.creditId) &&
+        Objects.equals(this.creationDate, application.creationDate) &&
+        Objects.equals(this.appliedOffer, application.appliedOffer) &&
+        Objects.equals(this.signDate, application.signDate) &&
+        Objects.equals(this.sesCode, application.sesCode);
   }
 
   @Override
@@ -191,7 +191,7 @@ public class ApplicationDTO implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ApplicationDTO {\n");
+    sb.append("class Application {\n");
     sb.append("    clientId: ").append(toIndentedString(clientId)).append("\n");
     sb.append("    creditId: ").append(toIndentedString(creditId)).append("\n");
     sb.append("    creationDate: ").append(toIndentedString(creationDate)).append("\n");

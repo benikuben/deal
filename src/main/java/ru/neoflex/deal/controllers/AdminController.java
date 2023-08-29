@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.neoflex.deal.services.AdminService;
 import ru.neoflex.openapi.controllers.AdminApi;
-import ru.neoflex.openapi.dtos.ApplicationDTO;
+import ru.neoflex.openapi.dtos.Application;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ public class AdminController implements AdminApi {
     private final AdminService adminService;
 
     @Override
-    public ResponseEntity<ApplicationDTO> getApplicationById(Long applicationId) {
+    public ResponseEntity<Application> getApplicationById(Long applicationId) {
         return new ResponseEntity<>(adminService.getApplicationById(applicationId), HttpStatus.OK);
     }
 

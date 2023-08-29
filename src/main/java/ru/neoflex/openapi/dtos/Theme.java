@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Theme
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
 public enum Theme {
   
   FINISH_REGISTRATION("FINISH_REGISTRATION"),

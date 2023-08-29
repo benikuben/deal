@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
-import ru.neoflex.openapi.dtos.EmploymentDTO;
+import ru.neoflex.openapi.dtos.Employment;
 import ru.neoflex.openapi.dtos.Gender;
 import ru.neoflex.openapi.dtos.MaritalStatus;
 import ru.neoflex.openapi.dtos.Passport;
@@ -25,9 +25,9 @@ import jakarta.annotation.Generated;
  * Client
  */
 
-@Schema(name = "ClientDTO", description = "Client")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public class ClientDTO implements Serializable {
+@Schema(name = "Client", description = "Client")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+public class Client implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -50,11 +50,11 @@ public class ClientDTO implements Serializable {
 
   private Passport passport;
 
-  private EmploymentDTO employment;
+  private Employment employment;
 
   private String account;
 
-  public ClientDTO lastName(String lastName) {
+  public Client lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -74,7 +74,7 @@ public class ClientDTO implements Serializable {
     this.lastName = lastName;
   }
 
-  public ClientDTO firstName(String firstName) {
+  public Client firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -94,7 +94,7 @@ public class ClientDTO implements Serializable {
     this.firstName = firstName;
   }
 
-  public ClientDTO middleName(String middleName) {
+  public Client middleName(String middleName) {
     this.middleName = middleName;
     return this;
   }
@@ -114,7 +114,7 @@ public class ClientDTO implements Serializable {
     this.middleName = middleName;
   }
 
-  public ClientDTO birthdate(LocalDate birthdate) {
+  public Client birthdate(LocalDate birthdate) {
     this.birthdate = birthdate;
     return this;
   }
@@ -134,7 +134,7 @@ public class ClientDTO implements Serializable {
     this.birthdate = birthdate;
   }
 
-  public ClientDTO email(String email) {
+  public Client email(String email) {
     this.email = email;
     return this;
   }
@@ -154,7 +154,7 @@ public class ClientDTO implements Serializable {
     this.email = email;
   }
 
-  public ClientDTO gender(Gender gender) {
+  public Client gender(Gender gender) {
     this.gender = gender;
     return this;
   }
@@ -174,7 +174,7 @@ public class ClientDTO implements Serializable {
     this.gender = gender;
   }
 
-  public ClientDTO maritalStatus(MaritalStatus maritalStatus) {
+  public Client maritalStatus(MaritalStatus maritalStatus) {
     this.maritalStatus = maritalStatus;
     return this;
   }
@@ -194,7 +194,7 @@ public class ClientDTO implements Serializable {
     this.maritalStatus = maritalStatus;
   }
 
-  public ClientDTO dependentAmount(Integer dependentAmount) {
+  public Client dependentAmount(Integer dependentAmount) {
     this.dependentAmount = dependentAmount;
     return this;
   }
@@ -216,7 +216,7 @@ public class ClientDTO implements Serializable {
     this.dependentAmount = dependentAmount;
   }
 
-  public ClientDTO passport(Passport passport) {
+  public Client passport(Passport passport) {
     this.passport = passport;
     return this;
   }
@@ -236,7 +236,7 @@ public class ClientDTO implements Serializable {
     this.passport = passport;
   }
 
-  public ClientDTO employment(EmploymentDTO employment) {
+  public Client employment(Employment employment) {
     this.employment = employment;
     return this;
   }
@@ -248,15 +248,15 @@ public class ClientDTO implements Serializable {
   @Valid 
   @Schema(name = "employment", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("employment")
-  public EmploymentDTO getEmployment() {
+  public Employment getEmployment() {
     return employment;
   }
 
-  public void setEmployment(EmploymentDTO employment) {
+  public void setEmployment(Employment employment) {
     this.employment = employment;
   }
 
-  public ClientDTO account(String account) {
+  public Client account(String account) {
     this.account = account;
     return this;
   }
@@ -284,18 +284,18 @@ public class ClientDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ClientDTO clientDTO = (ClientDTO) o;
-    return Objects.equals(this.lastName, clientDTO.lastName) &&
-        Objects.equals(this.firstName, clientDTO.firstName) &&
-        Objects.equals(this.middleName, clientDTO.middleName) &&
-        Objects.equals(this.birthdate, clientDTO.birthdate) &&
-        Objects.equals(this.email, clientDTO.email) &&
-        Objects.equals(this.gender, clientDTO.gender) &&
-        Objects.equals(this.maritalStatus, clientDTO.maritalStatus) &&
-        Objects.equals(this.dependentAmount, clientDTO.dependentAmount) &&
-        Objects.equals(this.passport, clientDTO.passport) &&
-        Objects.equals(this.employment, clientDTO.employment) &&
-        Objects.equals(this.account, clientDTO.account);
+    Client client = (Client) o;
+    return Objects.equals(this.lastName, client.lastName) &&
+        Objects.equals(this.firstName, client.firstName) &&
+        Objects.equals(this.middleName, client.middleName) &&
+        Objects.equals(this.birthdate, client.birthdate) &&
+        Objects.equals(this.email, client.email) &&
+        Objects.equals(this.gender, client.gender) &&
+        Objects.equals(this.maritalStatus, client.maritalStatus) &&
+        Objects.equals(this.dependentAmount, client.dependentAmount) &&
+        Objects.equals(this.passport, client.passport) &&
+        Objects.equals(this.employment, client.employment) &&
+        Objects.equals(this.account, client.account);
   }
 
   @Override
@@ -306,7 +306,7 @@ public class ClientDTO implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ClientDTO {\n");
+    sb.append("class Client {\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    middleName: ").append(toIndentedString(middleName)).append("\n");

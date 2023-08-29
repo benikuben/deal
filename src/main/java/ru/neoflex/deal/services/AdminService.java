@@ -1,9 +1,9 @@
 package ru.neoflex.deal.services;
 
-import ru.neoflex.openapi.dtos.ApplicationDTO;
+import ru.neoflex.openapi.dtos.Application;
 
 public interface AdminService {
-    ApplicationDTO getApplicationById(Long applicationId);
+    Application getApplicationById(Long applicationId);
 
     void updateApplicationStatus(Long applicationId, String newStatus);
 }

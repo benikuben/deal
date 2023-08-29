@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
-import ru.neoflex.openapi.dtos.EmploymentDTO;
+import ru.neoflex.openapi.dtos.Employment;
 import ru.neoflex.openapi.dtos.Gender;
 import ru.neoflex.openapi.dtos.MaritalStatus;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -24,9 +24,9 @@ import jakarta.annotation.Generated;
  * Scoring data
  */
 
-@Schema(name = "ScoringDataDTO", description = "Scoring data")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public class ScoringDataDTO implements Serializable {
+@Schema(name = "ScoringData", description = "Scoring data")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+public class ScoringData implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -58,7 +58,7 @@ public class ScoringDataDTO implements Serializable {
 
   private Integer dependentAmount;
 
-  private EmploymentDTO employment;
+  private Employment employment;
 
   private String account;
 
@@ -66,7 +66,7 @@ public class ScoringDataDTO implements Serializable {
 
   private Boolean isSalaryClient;
 
-  public ScoringDataDTO amount(java.math.BigDecimal amount) {
+  public ScoringData amount(java.math.BigDecimal amount) {
     this.amount = amount;
     return this;
   }
@@ -87,7 +87,7 @@ public class ScoringDataDTO implements Serializable {
     this.amount = amount;
   }
 
-  public ScoringDataDTO term(Integer term) {
+  public ScoringData term(Integer term) {
     this.term = term;
     return this;
   }
@@ -108,7 +108,7 @@ public class ScoringDataDTO implements Serializable {
     this.term = term;
   }
 
-  public ScoringDataDTO firstName(String firstName) {
+  public ScoringData firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -128,7 +128,7 @@ public class ScoringDataDTO implements Serializable {
     this.firstName = firstName;
   }
 
-  public ScoringDataDTO lastName(String lastName) {
+  public ScoringData lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -148,7 +148,7 @@ public class ScoringDataDTO implements Serializable {
     this.lastName = lastName;
   }
 
-  public ScoringDataDTO middleName(String middleName) {
+  public ScoringData middleName(String middleName) {
     this.middleName = middleName;
     return this;
   }
@@ -168,7 +168,7 @@ public class ScoringDataDTO implements Serializable {
     this.middleName = middleName;
   }
 
-  public ScoringDataDTO gender(Gender gender) {
+  public ScoringData gender(Gender gender) {
     this.gender = gender;
     return this;
   }
@@ -188,7 +188,7 @@ public class ScoringDataDTO implements Serializable {
     this.gender = gender;
   }
 
-  public ScoringDataDTO birthdate(LocalDate birthdate) {
+  public ScoringData birthdate(LocalDate birthdate) {
     this.birthdate = birthdate;
     return this;
   }
@@ -208,7 +208,7 @@ public class ScoringDataDTO implements Serializable {
     this.birthdate = birthdate;
   }
 
-  public ScoringDataDTO passportSeries(String passportSeries) {
+  public ScoringData passportSeries(String passportSeries) {
     this.passportSeries = passportSeries;
     return this;
   }
@@ -228,7 +228,7 @@ public class ScoringDataDTO implements Serializable {
     this.passportSeries = passportSeries;
   }
 
-  public ScoringDataDTO passportNumber(String passportNumber) {
+  public ScoringData passportNumber(String passportNumber) {
     this.passportNumber = passportNumber;
     return this;
   }
@@ -248,7 +248,7 @@ public class ScoringDataDTO implements Serializable {
     this.passportNumber = passportNumber;
   }
 
-  public ScoringDataDTO passportIssueDate(LocalDate passportIssueDate) {
+  public ScoringData passportIssueDate(LocalDate passportIssueDate) {
     this.passportIssueDate = passportIssueDate;
     return this;
   }
@@ -268,7 +268,7 @@ public class ScoringDataDTO implements Serializable {
     this.passportIssueDate = passportIssueDate;
   }
 
-  public ScoringDataDTO passportIssueBranch(String passportIssueBranch) {
+  public ScoringData passportIssueBranch(String passportIssueBranch) {
     this.passportIssueBranch = passportIssueBranch;
     return this;
   }
@@ -288,7 +288,7 @@ public class ScoringDataDTO implements Serializable {
     this.passportIssueBranch = passportIssueBranch;
   }
 
-  public ScoringDataDTO maritalStatus(MaritalStatus maritalStatus) {
+  public ScoringData maritalStatus(MaritalStatus maritalStatus) {
     this.maritalStatus = maritalStatus;
     return this;
   }
@@ -308,7 +308,7 @@ public class ScoringDataDTO implements Serializable {
     this.maritalStatus = maritalStatus;
   }
 
-  public ScoringDataDTO dependentAmount(Integer dependentAmount) {
+  public ScoringData dependentAmount(Integer dependentAmount) {
     this.dependentAmount = dependentAmount;
     return this;
   }
@@ -330,7 +330,7 @@ public class ScoringDataDTO implements Serializable {
     this.dependentAmount = dependentAmount;
   }
 
-  public ScoringDataDTO employment(EmploymentDTO employment) {
+  public ScoringData employment(Employment employment) {
     this.employment = employment;
     return this;
   }
@@ -342,15 +342,15 @@ public class ScoringDataDTO implements Serializable {
   @Valid 
   @Schema(name = "employment", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("employment")
-  public EmploymentDTO getEmployment() {
+  public Employment getEmployment() {
     return employment;
   }
 
-  public void setEmployment(EmploymentDTO employment) {
+  public void setEmployment(Employment employment) {
     this.employment = employment;
   }
 
-  public ScoringDataDTO account(String account) {
+  public ScoringData account(String account) {
     this.account = account;
     return this;
   }
@@ -370,7 +370,7 @@ public class ScoringDataDTO implements Serializable {
     this.account = account;
   }
 
-  public ScoringDataDTO isInsuranceEnabled(Boolean isInsuranceEnabled) {
+  public ScoringData isInsuranceEnabled(Boolean isInsuranceEnabled) {
     this.isInsuranceEnabled = isInsuranceEnabled;
     return this;
   }
@@ -390,7 +390,7 @@ public class ScoringDataDTO implements Serializable {
     this.isInsuranceEnabled = isInsuranceEnabled;
   }
 
-  public ScoringDataDTO isSalaryClient(Boolean isSalaryClient) {
+  public ScoringData isSalaryClient(Boolean isSalaryClient) {
     this.isSalaryClient = isSalaryClient;
     return this;
   }
@@ -418,24 +418,24 @@ public class ScoringDataDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ScoringDataDTO scoringDataDTO = (ScoringDataDTO) o;
-    return Objects.equals(this.amount, scoringDataDTO.amount) &&
-        Objects.equals(this.term, scoringDataDTO.term) &&
-        Objects.equals(this.firstName, scoringDataDTO.firstName) &&
-        Objects.equals(this.lastName, scoringDataDTO.lastName) &&
-        Objects.equals(this.middleName, scoringDataDTO.middleName) &&
-        Objects.equals(this.gender, scoringDataDTO.gender) &&
-        Objects.equals(this.birthdate, scoringDataDTO.birthdate) &&
-        Objects.equals(this.passportSeries, scoringDataDTO.passportSeries) &&
-        Objects.equals(this.passportNumber, scoringDataDTO.passportNumber) &&
-        Objects.equals(this.passportIssueDate, scoringDataDTO.passportIssueDate) &&
-        Objects.equals(this.passportIssueBranch, scoringDataDTO.passportIssueBranch) &&
-        Objects.equals(this.maritalStatus, scoringDataDTO.maritalStatus) &&
-        Objects.equals(this.dependentAmount, scoringDataDTO.dependentAmount) &&
-        Objects.equals(this.employment, scoringDataDTO.employment) &&
-        Objects.equals(this.account, scoringDataDTO.account) &&
-        Objects.equals(this.isInsuranceEnabled, scoringDataDTO.isInsuranceEnabled) &&
-        Objects.equals(this.isSalaryClient, scoringDataDTO.isSalaryClient);
+    ScoringData scoringData = (ScoringData) o;
+    return Objects.equals(this.amount, scoringData.amount) &&
+        Objects.equals(this.term, scoringData.term) &&
+        Objects.equals(this.firstName, scoringData.firstName) &&
+        Objects.equals(this.lastName, scoringData.lastName) &&
+        Objects.equals(this.middleName, scoringData.middleName) &&
+        Objects.equals(this.gender, scoringData.gender) &&
+        Objects.equals(this.birthdate, scoringData.birthdate) &&
+        Objects.equals(this.passportSeries, scoringData.passportSeries) &&
+        Objects.equals(this.passportNumber, scoringData.passportNumber) &&
+        Objects.equals(this.passportIssueDate, scoringData.passportIssueDate) &&
+        Objects.equals(this.passportIssueBranch, scoringData.passportIssueBranch) &&
+        Objects.equals(this.maritalStatus, scoringData.maritalStatus) &&
+        Objects.equals(this.dependentAmount, scoringData.dependentAmount) &&
+        Objects.equals(this.employment, scoringData.employment) &&
+        Objects.equals(this.account, scoringData.account) &&
+        Objects.equals(this.isInsuranceEnabled, scoringData.isInsuranceEnabled) &&
+        Objects.equals(this.isSalaryClient, scoringData.isSalaryClient);
   }
 
   @Override
@@ -446,7 +446,7 @@ public class ScoringDataDTO implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ScoringDataDTO {\n");
+    sb.append("class ScoringData {\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    term: ").append(toIndentedString(term)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");

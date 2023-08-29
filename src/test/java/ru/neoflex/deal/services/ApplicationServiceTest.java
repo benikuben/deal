@@ -9,9 +9,9 @@ import org.springframework.beans.BeanUtils;
 import ru.neoflex.deal.models.Application;
 import ru.neoflex.deal.models.Client;
 import ru.neoflex.deal.repositories.ApplicationRepository;
-import ru.neoflex.deal.util.exceptions.NotFoundException;
+import ru.neoflex.deal.exceptions.NotFoundException;
 import ru.neoflex.openapi.dtos.ApplicationStatus;
-import ru.neoflex.openapi.dtos.ApplicationStatusHistoryDTO;
+import ru.neoflex.openapi.dtos.ApplicationStatusHistory;
 import ru.neoflex.openapi.dtos.ChangeType;
 
 import java.time.LocalDateTime;
@@ -36,9 +36,9 @@ class ApplicationServiceTest {
     void save() {
         Client client = Client.builder()
                 .id(1L).build();
-        List<ApplicationStatusHistoryDTO> history =
+        List<ApplicationStatusHistory> history =
                 new ArrayList<>(Arrays.asList(
-                        new ApplicationStatusHistoryDTO(ApplicationStatus.PREAPPROVAL, LocalDateTime.now(), ChangeType.AUTOMATIC))
+                        new ApplicationStatusHistory(ApplicationStatus.PREAPPROVAL, LocalDateTime.now(), ChangeType.AUTOMATIC))
                 );
         Application application = Application.builder()
                 .clientId(client)

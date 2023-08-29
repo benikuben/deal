@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import ru.neoflex.deal.models.Application;
-import ru.neoflex.deal.models.Client;
-import ru.neoflex.deal.models.Credit;
 import ru.neoflex.openapi.dtos.*;
 
 import java.math.BigDecimal;
@@ -38,14 +35,14 @@ class ApplicationMapperTest {
                 .number("123456")
                 .issueDate(LocalDate.of(2014, 1, 1))
                 .issueBranch("UFMS Moscow");
-        EmploymentDTO employment = new EmploymentDTO()
+        Employment employment = new Employment()
                 .employmentStatus(EmploymentStatus.BUSINESS_OWNER)
                 .employerINN("0123456789")
                 .salary(BigDecimal.valueOf(20000))
                 .position(Position.TOP_MANAGER)
                 .workExperienceTotal(12)
                 .workExperienceCurrent(12);
-        Client client = Client.builder()
+        ru.neoflex.deal.models.Client client = ru.neoflex.deal.models.Client.builder()
                 .id(1L)
                 .lastName("Ivanov")
                 .firstName("Ivan")
@@ -65,7 +62,7 @@ class ApplicationMapperTest {
         List<PaymentScheduleElement> payments = List.of(
                 new PaymentScheduleElement().number(1).date(LocalDate.of(2000, 7, 1)).totalPayment(amount.negate()).interestPayment(BigDecimal.ZERO).debtPayment(BigDecimal.ZERO).remainingDebt(amount)
         );
-        Credit credit = Credit.builder()
+        ru.neoflex.deal.models.Credit credit = ru.neoflex.deal.models.Credit.builder()
                 .id(1L)
                 .amount(amount)
                 .term(6)
@@ -77,7 +74,7 @@ class ApplicationMapperTest {
                 .isSalaryClient(false)
                 .creditStatus(CreditStatus.CALCULATED)
                 .build();
-        LoanOfferDTO offer = new LoanOfferDTO()
+        LoanOffer offer = new LoanOffer()
                 .applicationId(1L)
                 .requestedAmount(amount)
                 .totalAmount(amount)
@@ -86,13 +83,13 @@ class ApplicationMapperTest {
                 .rate(rate)
                 .isInsuranceEnabled(false)
                 .isSalaryClient(false);
-        List<ApplicationStatusHistoryDTO> history = List.of(
-                new ApplicationStatusHistoryDTO()
+        List<ApplicationStatusHistory> history = List.of(
+                new ApplicationStatusHistory()
                         .status(ApplicationStatus.PREAPPROVAL)
                         .changeType(ChangeType.AUTOMATIC)
                         .time(LocalDateTime.now())
         );
-        Application application = Application.builder()
+        ru.neoflex.deal.models.Application application = ru.neoflex.deal.models.Application.builder()
                 .id(1L)
                 .clientId(client)
                 .creditId(credit)
@@ -105,18 +102,18 @@ class ApplicationMapperTest {
                 .build();
 
         //expected
-        ClientDTO clientDTO = new ClientDTO();
+        Client clientDTO = new Client();
         BeanUtils.copyProperties(client, clientDTO);
-        CreditDTO creditDTO = new CreditDTO();
+        Credit creditDTO = new Credit();
         BeanUtils.copyProperties(credit, creditDTO);
-        ApplicationDTO expected = new ApplicationDTO();
+        Application expected = new Application();
         BeanUtils.copyProperties(application, expected);
         expected
                 .clientId(clientDTO)
                 .creditId(creditDTO);
 
         //actual
-        ApplicationDTO actual = applicationMapper.applicationToApplicationDTO(application);
+        Application actual = applicationMapper.applicationToApplicationDTO(application);
 
         //tests
         assertNotNull(actual);

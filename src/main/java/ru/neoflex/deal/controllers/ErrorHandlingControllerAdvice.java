@@ -1,4 +1,4 @@
-package ru.neoflex.deal.util;
+package ru.neoflex.deal.controllers;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.validation.ConstraintViolationException;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import ru.neoflex.deal.util.exceptions.ApplicationStatusException;
-import ru.neoflex.deal.util.exceptions.InvalidSesCodeException;
-import ru.neoflex.deal.util.exceptions.NotFoundException;
+import ru.neoflex.deal.exceptions.ApplicationStatusException;
+import ru.neoflex.deal.exceptions.InvalidSesCodeException;
+import ru.neoflex.deal.exceptions.NotFoundException;
 import ru.neoflex.openapi.dtos.ErrorResponse;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class ErrorHandlingControllerAdvice {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorResponse handleNotFoundException(NotFoundException e) {
         return new ErrorResponse(e.getMessage());

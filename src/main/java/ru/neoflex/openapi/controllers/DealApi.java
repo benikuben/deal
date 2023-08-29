@@ -6,9 +6,9 @@
 package ru.neoflex.openapi.controllers;
 
 import ru.neoflex.openapi.dtos.ErrorResponse;
-import ru.neoflex.openapi.dtos.FinishRegistrationRequestDTO;
-import ru.neoflex.openapi.dtos.LoanApplicationRequestDTO;
-import ru.neoflex.openapi.dtos.LoanOfferDTO;
+import ru.neoflex.openapi.dtos.FinishRegistrationRequest;
+import ru.neoflex.openapi.dtos.LoanApplicationRequest;
+import ru.neoflex.openapi.dtos.LoanOffer;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "deal", description = "the deal API")
 public interface DealApi {
@@ -47,7 +47,7 @@ public interface DealApi {
     /**
      * PUT /deal/offer : Choosing one of the offers
      *
-     * @param loanOfferDTO  (required)
+     * @param loanOffer  (required)
      * @return Offer applied (status code 200)
      *         or Bad request (status code 400)
      */
@@ -68,13 +68,13 @@ public interface DealApi {
         consumes = { "application/json" }
     )
     default ResponseEntity<Void> _applyOffer(
-        @Parameter(name = "LoanOfferDTO", description = "", required = true) @Valid @RequestBody LoanOfferDTO loanOfferDTO
+        @Parameter(name = "LoanOffer", description = "", required = true) @Valid @RequestBody LoanOffer loanOffer
     ) {
-        return applyOffer(loanOfferDTO);
+        return applyOffer(loanOffer);
     }
 
     // Override this method
-    default  ResponseEntity<Void> applyOffer(LoanOfferDTO loanOfferDTO) {
+    default  ResponseEntity<Void> applyOffer(LoanOffer loanOffer) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -83,7 +83,7 @@ public interface DealApi {
     /**
      * POST /deal/application : Calculation of loan terms
      *
-     * @param loanApplicationRequestDTO  (required)
+     * @param loanApplicationRequest  (required)
      * @return Application created (status code 200)
      *         or Bad request (status code 400)
      */
@@ -92,7 +92,7 @@ public interface DealApi {
         summary = "Calculation of loan terms",
         responses = {
             @ApiResponse(responseCode = "200", description = "Application created", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = LoanOfferDTO.class)))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = LoanOffer.class)))
             }),
             @ApiResponse(responseCode = "400", description = "Bad request", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorResponse.class)))
@@ -105,14 +105,14 @@ public interface DealApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default ResponseEntity<List<LoanOfferDTO>> _createApplication(
-        @Parameter(name = "LoanApplicationRequestDTO", description = "", required = true) @Valid @RequestBody LoanApplicationRequestDTO loanApplicationRequestDTO
+    default ResponseEntity<List<LoanOffer>> _createApplication(
+        @Parameter(name = "LoanApplicationRequest", description = "", required = true) @Valid @RequestBody LoanApplicationRequest loanApplicationRequest
     ) {
-        return createApplication(loanApplicationRequestDTO);
+        return createApplication(loanApplicationRequest);
     }
 
     // Override this method
-    default  ResponseEntity<List<LoanOfferDTO>> createApplication(LoanApplicationRequestDTO loanApplicationRequestDTO) {
+    default  ResponseEntity<List<LoanOffer>> createApplication(LoanApplicationRequest loanApplicationRequest) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -131,7 +131,7 @@ public interface DealApi {
      * PUT /deal/calculate/{applicationId} : Completion of registration and full loan calculation
      *
      * @param applicationId Id of application (required)
-     * @param finishRegistrationRequestDTO  (required)
+     * @param finishRegistrationRequest  (required)
      * @return Application updated (status code 200)
      *         or Bad request (status code 400)
      */
@@ -153,13 +153,13 @@ public interface DealApi {
     )
     default ResponseEntity<Void> _finishRegistration(
         @Parameter(name = "applicationId", description = "Id of application", required = true, in = ParameterIn.PATH) @PathVariable("applicationId") Long applicationId,
-        @Parameter(name = "FinishRegistrationRequestDTO", description = "", required = true) @Valid @RequestBody FinishRegistrationRequestDTO finishRegistrationRequestDTO
+        @Parameter(name = "FinishRegistrationRequest", description = "", required = true) @Valid @RequestBody FinishRegistrationRequest finishRegistrationRequest
     ) {
-        return finishRegistration(applicationId, finishRegistrationRequestDTO);
+        return finishRegistration(applicationId, finishRegistrationRequest);
     }
 
     // Override this method
-    default  ResponseEntity<Void> finishRegistration(Long applicationId, FinishRegistrationRequestDTO finishRegistrationRequestDTO) {
+    default  ResponseEntity<Void> finishRegistration(Long applicationId, FinishRegistrationRequest finishRegistrationRequest) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

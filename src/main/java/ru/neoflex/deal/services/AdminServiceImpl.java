@@ -3,7 +3,6 @@ package ru.neoflex.deal.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.neoflex.deal.models.Application;
 import ru.neoflex.deal.util.mappers.ApplicationMapper;
 import ru.neoflex.openapi.dtos.*;
 
@@ -17,8 +16,8 @@ public class AdminServiceImpl implements AdminService {
     private final ApplicationMapper applicationMapper;
 
     @Override
-    public ApplicationDTO getApplicationById(Long applicationId) {
-        Application application = applicationService.findById(applicationId);
+    public Application getApplicationById(Long applicationId) {
+        ru.neoflex.deal.models.Application application = applicationService.findById(applicationId);
         log.info("Application with id {} was found in database", applicationId);
 
         return applicationMapper.applicationToApplicationDTO(application);
@@ -29,7 +28,7 @@ public class AdminServiceImpl implements AdminService {
         try {
             ApplicationStatus status = ApplicationStatus.valueOf(newStatus);
 
-            Application application = applicationService.findById(applicationId);
+            ru.neoflex.deal.models.Application application = applicationService.findById(applicationId);
             log.info("Application with id {} was found in database", applicationId);
 
             updateStatus(application, status, ChangeType.AUTOMATIC);
@@ -39,6 +38,7 @@ public class AdminServiceImpl implements AdminService {
             log.info("Application was updated in database - {}", application);
         } catch (IllegalArgumentException e) {
             log.warn("Invalid application status name {}", newStatus);
+            throw e;
         }
     }
 }

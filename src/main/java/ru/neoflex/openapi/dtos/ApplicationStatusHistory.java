@@ -24,9 +24,9 @@ import jakarta.annotation.Generated;
  * Application status history
  */
 
-@Schema(name = "ApplicationStatusHistoryDTO", description = "Application status history")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public class ApplicationStatusHistoryDTO implements Serializable {
+@Schema(name = "ApplicationStatusHistory", description = "Application status history")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+public class ApplicationStatusHistory implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -40,23 +40,23 @@ public class ApplicationStatusHistoryDTO implements Serializable {
 
   /**
    * Default constructor
-   * @deprecated Use {@link ApplicationStatusHistoryDTO#ApplicationStatusHistoryDTO(ApplicationStatus, LocalDateTime, ChangeType)}
+   * @deprecated Use {@link ApplicationStatusHistory#ApplicationStatusHistory(ApplicationStatus, LocalDateTime, ChangeType)}
    */
   @Deprecated
-  public ApplicationStatusHistoryDTO() {
+  public ApplicationStatusHistory() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public ApplicationStatusHistoryDTO(ApplicationStatus status, LocalDateTime time, ChangeType changeType) {
+  public ApplicationStatusHistory(ApplicationStatus status, LocalDateTime time, ChangeType changeType) {
     this.status = status;
     this.time = time;
     this.changeType = changeType;
   }
 
-  public ApplicationStatusHistoryDTO status(ApplicationStatus status) {
+  public ApplicationStatusHistory status(ApplicationStatus status) {
     this.status = status;
     return this;
   }
@@ -76,7 +76,7 @@ public class ApplicationStatusHistoryDTO implements Serializable {
     this.status = status;
   }
 
-  public ApplicationStatusHistoryDTO time(LocalDateTime time) {
+  public ApplicationStatusHistory time(LocalDateTime time) {
     this.time = time;
     return this;
   }
@@ -96,7 +96,7 @@ public class ApplicationStatusHistoryDTO implements Serializable {
     this.time = time;
   }
 
-  public ApplicationStatusHistoryDTO changeType(ChangeType changeType) {
+  public ApplicationStatusHistory changeType(ChangeType changeType) {
     this.changeType = changeType;
     return this;
   }
@@ -124,10 +124,10 @@ public class ApplicationStatusHistoryDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ApplicationStatusHistoryDTO applicationStatusHistoryDTO = (ApplicationStatusHistoryDTO) o;
-    return Objects.equals(this.status, applicationStatusHistoryDTO.status) &&
-        Objects.equals(this.time, applicationStatusHistoryDTO.time) &&
-        Objects.equals(this.changeType, applicationStatusHistoryDTO.changeType);
+    ApplicationStatusHistory applicationStatusHistory = (ApplicationStatusHistory) o;
+    return Objects.equals(this.status, applicationStatusHistory.status) &&
+        Objects.equals(this.time, applicationStatusHistory.time) &&
+        Objects.equals(this.changeType, applicationStatusHistory.changeType);
   }
 
   @Override
@@ -138,7 +138,7 @@ public class ApplicationStatusHistoryDTO implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ApplicationStatusHistoryDTO {\n");
+    sb.append("class ApplicationStatusHistory {\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    time: ").append(toIndentedString(time)).append("\n");
     sb.append("    changeType: ").append(toIndentedString(changeType)).append("\n");

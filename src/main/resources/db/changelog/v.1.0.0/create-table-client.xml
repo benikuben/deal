@@ -21,6 +21,10 @@
             <column name="employment_id" type="jsonb"/>
             <column name="account" type="varchar(20)"/>
         </createTable>
+
+        <rollback>
+            <dropTable tableName="client"/>
+        </rollback>
     </changeSet>
 
 </databaseChangeLog>

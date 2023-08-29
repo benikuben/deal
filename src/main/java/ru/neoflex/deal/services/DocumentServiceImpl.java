@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.neoflex.deal.models.Application;
-import ru.neoflex.deal.util.exceptions.ApplicationStatusException;
-import ru.neoflex.deal.util.exceptions.InvalidSesCodeException;
+import ru.neoflex.deal.exceptions.ApplicationStatusException;
+import ru.neoflex.deal.exceptions.InvalidSesCodeException;
 import ru.neoflex.openapi.dtos.ApplicationStatus;
 import ru.neoflex.openapi.dtos.ChangeType;
 import ru.neoflex.openapi.dtos.EmailMessage;
@@ -28,7 +28,7 @@ public class DocumentServiceImpl implements DocumentService {
         log.info("Application with id {} was found in database", applicationId);
 
         if (!application.getStatus().equals(ApplicationStatus.CC_APPROVED)) {
-            log.info("ApplicationStatusException when updating status to PREPARE_DOCUMENTS. Expected status before the update - CC_APPROVED, actual - {}", application.getStatus());
+            log.warn("ApplicationStatusException when updating status to PREPARE_DOCUMENTS. Expected status before the update - CC_APPROVED, actual - {}", application.getStatus());
             throw new ApplicationStatusException();
         }
 
@@ -52,7 +52,7 @@ public class DocumentServiceImpl implements DocumentService {
         log.info("Application with id {} was found in database", applicationId);
 
         if (!application.getStatus().equals(ApplicationStatus.DOCUMENT_CREATED)) {
-            log.info("ApplicationStatusException when sending ses code. Expected status  - DOCUMENT_CREATED, actual - {}", application.getStatus());
+            log.warn("ApplicationStatusException when sending ses code. Expected status  - DOCUMENT_CREATED, actual - {}", application.getStatus());
             throw new ApplicationStatusException();
         }
 
@@ -77,7 +77,7 @@ public class DocumentServiceImpl implements DocumentService {
         log.info("Application with id {} was found in database", applicationId);
 
         if (!application.getStatus().equals(ApplicationStatus.DOCUMENT_CREATED)) {
-            log.info("ApplicationStatusException when updating status to DOCUMENT_SIGNED. Expected status before the update - DOCUMENT_CREATED, actual - {}", application.getStatus());
+            log.warn("ApplicationStatusException when updating status to DOCUMENT_SIGNED. Expected status before the update - DOCUMENT_CREATED, actual - {}", application.getStatus());
             throw new ApplicationStatusException();
         }
 

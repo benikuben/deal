@@ -5,7 +5,7 @@
  */
 package ru.neoflex.openapi.controllers;
 
-import ru.neoflex.openapi.dtos.ApplicationDTO;
+import ru.neoflex.openapi.dtos.Application;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "admin", description = "the admin API")
 public interface AdminApi {
@@ -52,7 +52,7 @@ public interface AdminApi {
         summary = "Get application by id",
         responses = {
             @ApiResponse(responseCode = "200", description = "Received application", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ApplicationDTO.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Application.class))
             })
         }
     )
@@ -61,14 +61,14 @@ public interface AdminApi {
         value = "/admin/application/{applicationId}",
         produces = { "application/json" }
     )
-    default ResponseEntity<ApplicationDTO> _getApplicationById(
+    default ResponseEntity<Application> _getApplicationById(
         @Parameter(name = "applicationId", description = "Id of application", required = true, in = ParameterIn.PATH) @PathVariable("applicationId") Long applicationId
     ) {
         return getApplicationById(applicationId);
     }
 
     // Override this method
-    default  ResponseEntity<ApplicationDTO> getApplicationById(Long applicationId) {
+    default  ResponseEntity<Application> getApplicationById(Long applicationId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

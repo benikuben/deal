@@ -22,9 +22,9 @@ import jakarta.annotation.Generated;
  * Credit
  */
 
-@Schema(name = "CreditDTO", description = "Credit")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public class CreditDTO implements Serializable {
+@Schema(name = "Credit", description = "Credit")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+public class Credit implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class CreditDTO implements Serializable {
 
   private Boolean isSalaryClient;
 
-  public CreditDTO amount(java.math.BigDecimal amount) {
+  public Credit amount(java.math.BigDecimal amount) {
     this.amount = amount;
     return this;
   }
@@ -66,7 +66,7 @@ public class CreditDTO implements Serializable {
     this.amount = amount;
   }
 
-  public CreditDTO term(Integer term) {
+  public Credit term(Integer term) {
     this.term = term;
     return this;
   }
@@ -87,7 +87,7 @@ public class CreditDTO implements Serializable {
     this.term = term;
   }
 
-  public CreditDTO monthlyPayment(java.math.BigDecimal monthlyPayment) {
+  public Credit monthlyPayment(java.math.BigDecimal monthlyPayment) {
     this.monthlyPayment = monthlyPayment;
     return this;
   }
@@ -107,7 +107,7 @@ public class CreditDTO implements Serializable {
     this.monthlyPayment = monthlyPayment;
   }
 
-  public CreditDTO rate(java.math.BigDecimal rate) {
+  public Credit rate(java.math.BigDecimal rate) {
     this.rate = rate;
     return this;
   }
@@ -127,7 +127,7 @@ public class CreditDTO implements Serializable {
     this.rate = rate;
   }
 
-  public CreditDTO psk(java.math.BigDecimal psk) {
+  public Credit psk(java.math.BigDecimal psk) {
     this.psk = psk;
     return this;
   }
@@ -147,12 +147,12 @@ public class CreditDTO implements Serializable {
     this.psk = psk;
   }
 
-  public CreditDTO paymentSchedule(List<@Valid PaymentScheduleElement> paymentSchedule) {
+  public Credit paymentSchedule(List<@Valid PaymentScheduleElement> paymentSchedule) {
     this.paymentSchedule = paymentSchedule;
     return this;
   }
 
-  public CreditDTO addPaymentScheduleItem(PaymentScheduleElement paymentScheduleItem) {
+  public Credit addPaymentScheduleItem(PaymentScheduleElement paymentScheduleItem) {
     if (this.paymentSchedule == null) {
       this.paymentSchedule = new ArrayList<>();
     }
@@ -175,7 +175,7 @@ public class CreditDTO implements Serializable {
     this.paymentSchedule = paymentSchedule;
   }
 
-  public CreditDTO isInsuranceEnabled(Boolean isInsuranceEnabled) {
+  public Credit isInsuranceEnabled(Boolean isInsuranceEnabled) {
     this.isInsuranceEnabled = isInsuranceEnabled;
     return this;
   }
@@ -195,7 +195,7 @@ public class CreditDTO implements Serializable {
     this.isInsuranceEnabled = isInsuranceEnabled;
   }
 
-  public CreditDTO isSalaryClient(Boolean isSalaryClient) {
+  public Credit isSalaryClient(Boolean isSalaryClient) {
     this.isSalaryClient = isSalaryClient;
     return this;
   }
@@ -223,15 +223,15 @@ public class CreditDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreditDTO creditDTO = (CreditDTO) o;
-    return Objects.equals(this.amount, creditDTO.amount) &&
-        Objects.equals(this.term, creditDTO.term) &&
-        Objects.equals(this.monthlyPayment, creditDTO.monthlyPayment) &&
-        Objects.equals(this.rate, creditDTO.rate) &&
-        Objects.equals(this.psk, creditDTO.psk) &&
-        Objects.equals(this.paymentSchedule, creditDTO.paymentSchedule) &&
-        Objects.equals(this.isInsuranceEnabled, creditDTO.isInsuranceEnabled) &&
-        Objects.equals(this.isSalaryClient, creditDTO.isSalaryClient);
+    Credit credit = (Credit) o;
+    return Objects.equals(this.amount, credit.amount) &&
+        Objects.equals(this.term, credit.term) &&
+        Objects.equals(this.monthlyPayment, credit.monthlyPayment) &&
+        Objects.equals(this.rate, credit.rate) &&
+        Objects.equals(this.psk, credit.psk) &&
+        Objects.equals(this.paymentSchedule, credit.paymentSchedule) &&
+        Objects.equals(this.isInsuranceEnabled, credit.isInsuranceEnabled) &&
+        Objects.equals(this.isSalaryClient, credit.isSalaryClient);
   }
 
   @Override
@@ -242,7 +242,7 @@ public class CreditDTO implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreditDTO {\n");
+    sb.append("class Credit {\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    term: ").append(toIndentedString(term)).append("\n");
     sb.append("    monthlyPayment: ").append(toIndentedString(monthlyPayment)).append("\n");

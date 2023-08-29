@@ -3,9 +3,11 @@ package ru.neoflex.deal.config;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
+@Profile(value = "local")
 public class KafkaTopics {
     public static final String FINISH_REGISTRATION = "finish-registration";
     public static final String CREATE_DOCUMENTS = "create-documents";
@@ -18,7 +20,7 @@ public class KafkaTopics {
     public NewTopic finishRegistrationTopic() {
         return TopicBuilder
                 .name(FINISH_REGISTRATION)
-                .partitions(1)
+                .partitions(3)
                 .replicas(1).build();
     }
 
@@ -26,7 +28,7 @@ public class KafkaTopics {
     public NewTopic createDocumentsTopic() {
         return TopicBuilder
                 .name(CREATE_DOCUMENTS)
-                .partitions(1)
+                .partitions(3)
                 .replicas(1).build();
     }
 
@@ -34,7 +36,7 @@ public class KafkaTopics {
     public NewTopic sendDocumentsTopic() {
         return TopicBuilder
                 .name(SEND_DOCUMENTS)
-                .partitions(1)
+                .partitions(3)
                 .replicas(1).build();
     }
 
@@ -42,7 +44,7 @@ public class KafkaTopics {
     public NewTopic sendSesTopic() {
         return TopicBuilder
                 .name(SEND_SES)
-                .partitions(1)
+                .partitions(3)
                 .replicas(1).build();
     }
 
@@ -50,7 +52,7 @@ public class KafkaTopics {
     public NewTopic creditIssuedTopic() {
         return TopicBuilder
                 .name(CREDIT_ISSUED)
-                .partitions(1)
+                .partitions(3)
                 .replicas(1).build();
     }
 
@@ -58,7 +60,7 @@ public class KafkaTopics {
     public NewTopic applicationDeniedTopic() {
         return TopicBuilder
                 .name(APPLICATION_DENIED)
-                .partitions(1)
+                .partitions(3)
                 .replicas(1).build();
     }
 }

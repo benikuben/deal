@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import ru.neoflex.openapi.dtos.EmploymentDTO;
+import ru.neoflex.openapi.dtos.Employment;
 import ru.neoflex.openapi.dtos.Gender;
 import ru.neoflex.openapi.dtos.MaritalStatus;
 import ru.neoflex.openapi.dtos.Passport;
@@ -15,10 +15,10 @@ import java.util.List;
 @Entity
 @Table(name = "client")
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode(of = {"id"})
 @ToString(exclude = "applications")
 public class Client {
     @Id
@@ -59,7 +59,7 @@ public class Client {
 
     @Column(name = "employment_id")
     @JdbcTypeCode(SqlTypes.JSON)
-    private EmploymentDTO employment;
+    private Employment employment;
 
     @Column(name = "account")
     private String account;

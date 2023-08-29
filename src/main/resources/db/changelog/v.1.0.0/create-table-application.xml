@@ -27,6 +27,9 @@
                                  constraintName="application_credit_id_credit_credit_id"
                                  referencedTableName="credit" referencedColumnNames="credit_id" onDelete="CASCADE"/>
 
+        <rollback>
+            <dropTable tableName="application"/>
+        </rollback>
     </changeSet>
 
 </databaseChangeLog>

@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import ru.neoflex.deal.models.Credit;
-import ru.neoflex.openapi.dtos.CreditDTO;
+import ru.neoflex.openapi.dtos.Credit;
 import ru.neoflex.openapi.dtos.PaymentScheduleElement;
 
 import java.math.BigDecimal;
@@ -37,7 +36,7 @@ class CreditMapperTest {
         List<PaymentScheduleElement> payments = List.of(
                 new PaymentScheduleElement().number(1).date(LocalDate.of(2000, 7, 1)).totalPayment(amount.negate()).interestPayment(BigDecimal.ZERO).debtPayment(BigDecimal.ZERO).remainingDebt(amount)
         );
-        CreditDTO creditDTO = new CreditDTO()
+        Credit creditDTO = new Credit()
                 .amount(amount)
                 .term(6)
                 .monthlyPayment(monthlyPayment)
@@ -48,7 +47,7 @@ class CreditMapperTest {
                 .isSalaryClient(false);
 
         //expected
-        Credit expected = Credit.builder()
+        ru.neoflex.deal.models.Credit expected = ru.neoflex.deal.models.Credit.builder()
                 .amount(amount)
                 .term(6)
                 .monthlyPayment(monthlyPayment)
@@ -60,7 +59,7 @@ class CreditMapperTest {
                 .build();
 
         //actual
-        Credit actual = creditMapper.creditDTOToCredit(creditDTO);
+        ru.neoflex.deal.models.Credit actual = creditMapper.creditDTOToCredit(creditDTO);
 
         //tests
         assertNotNull(actual);

@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.neoflex.deal.services.DealService;
 import ru.neoflex.openapi.controllers.DealApi;
-import ru.neoflex.openapi.dtos.FinishRegistrationRequestDTO;
-import ru.neoflex.openapi.dtos.LoanApplicationRequestDTO;
-import ru.neoflex.openapi.dtos.LoanOfferDTO;
+import ru.neoflex.openapi.dtos.FinishRegistrationRequest;
+import ru.neoflex.openapi.dtos.LoanApplicationRequest;
+import ru.neoflex.openapi.dtos.LoanOffer;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class DealController implements DealApi {
      * POST: /deal/application - расчёт возможных условий кредита. Request - LoanApplicationRequestDTO, response - List<LoanOfferDTO>
      */
     @Override
-    public ResponseEntity<List<LoanOfferDTO>> createApplication(LoanApplicationRequestDTO loanApplicationRequestDTO) {
+    public ResponseEntity<List<LoanOffer>> createApplication(LoanApplicationRequest loanApplicationRequestDTO) {
         return new ResponseEntity<>(dealService.createApplication(loanApplicationRequestDTO), HttpStatus.OK);
     }
 
@@ -30,7 +30,7 @@ public class DealController implements DealApi {
      * PUT: /deal/offer - Выбор одного из предложений. Request LoanOfferDTO, response void
      */
     @Override
-    public ResponseEntity<Void> applyOffer(LoanOfferDTO loanOfferDTO) {
+    public ResponseEntity<Void> applyOffer(LoanOffer loanOfferDTO) {
         dealService.applyOffer(loanOfferDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -39,7 +39,7 @@ public class DealController implements DealApi {
      * PUT: /deal/calculate/{applicationId} - завершение регистрации + полный подсчёт кредита. Request - FinishRegistrationRequestDTO, param - Long, response void
      */
     @Override
-    public ResponseEntity<Void> finishRegistration(Long applicationId, FinishRegistrationRequestDTO finishRegistrationRequestDTO) {
+    public ResponseEntity<Void> finishRegistration(Long applicationId, FinishRegistrationRequest finishRegistrationRequestDTO) {
         dealService.finishRegistration(applicationId, finishRegistrationRequestDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

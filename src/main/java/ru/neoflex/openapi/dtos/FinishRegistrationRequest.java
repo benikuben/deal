@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
-import ru.neoflex.openapi.dtos.EmploymentDTO;
+import ru.neoflex.openapi.dtos.Employment;
 import ru.neoflex.openapi.dtos.Gender;
 import ru.neoflex.openapi.dtos.MaritalStatus;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -24,9 +24,9 @@ import jakarta.annotation.Generated;
  * Finish registration request
  */
 
-@Schema(name = "FinishRegistrationRequestDTO", description = "Finish registration request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-26T13:42:25.056214800+03:00[Europe/Moscow]")
-public class FinishRegistrationRequestDTO implements Serializable {
+@Schema(name = "FinishRegistrationRequest", description = "Finish registration request")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+public class FinishRegistrationRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -41,23 +41,23 @@ public class FinishRegistrationRequestDTO implements Serializable {
 
   private String passportIssueBranch;
 
-  private EmploymentDTO employment;
+  private Employment employment;
 
   private String account;
 
   /**
    * Default constructor
-   * @deprecated Use {@link FinishRegistrationRequestDTO#FinishRegistrationRequestDTO(Gender, MaritalStatus, Integer, LocalDate, String, EmploymentDTO, String)}
+   * @deprecated Use {@link FinishRegistrationRequest#FinishRegistrationRequest(Gender, MaritalStatus, Integer, LocalDate, String, Employment, String)}
    */
   @Deprecated
-  public FinishRegistrationRequestDTO() {
+  public FinishRegistrationRequest() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public FinishRegistrationRequestDTO(Gender gender, MaritalStatus maritalStatus, Integer dependentAmount, LocalDate passportIssueDate, String passportIssueBranch, EmploymentDTO employment, String account) {
+  public FinishRegistrationRequest(Gender gender, MaritalStatus maritalStatus, Integer dependentAmount, LocalDate passportIssueDate, String passportIssueBranch, Employment employment, String account) {
     this.gender = gender;
     this.maritalStatus = maritalStatus;
     this.dependentAmount = dependentAmount;
@@ -67,7 +67,7 @@ public class FinishRegistrationRequestDTO implements Serializable {
     this.account = account;
   }
 
-  public FinishRegistrationRequestDTO gender(Gender gender) {
+  public FinishRegistrationRequest gender(Gender gender) {
     this.gender = gender;
     return this;
   }
@@ -87,7 +87,7 @@ public class FinishRegistrationRequestDTO implements Serializable {
     this.gender = gender;
   }
 
-  public FinishRegistrationRequestDTO maritalStatus(MaritalStatus maritalStatus) {
+  public FinishRegistrationRequest maritalStatus(MaritalStatus maritalStatus) {
     this.maritalStatus = maritalStatus;
     return this;
   }
@@ -107,7 +107,7 @@ public class FinishRegistrationRequestDTO implements Serializable {
     this.maritalStatus = maritalStatus;
   }
 
-  public FinishRegistrationRequestDTO dependentAmount(Integer dependentAmount) {
+  public FinishRegistrationRequest dependentAmount(Integer dependentAmount) {
     this.dependentAmount = dependentAmount;
     return this;
   }
@@ -129,7 +129,7 @@ public class FinishRegistrationRequestDTO implements Serializable {
     this.dependentAmount = dependentAmount;
   }
 
-  public FinishRegistrationRequestDTO passportIssueDate(LocalDate passportIssueDate) {
+  public FinishRegistrationRequest passportIssueDate(LocalDate passportIssueDate) {
     this.passportIssueDate = passportIssueDate;
     return this;
   }
@@ -149,7 +149,7 @@ public class FinishRegistrationRequestDTO implements Serializable {
     this.passportIssueDate = passportIssueDate;
   }
 
-  public FinishRegistrationRequestDTO passportIssueBranch(String passportIssueBranch) {
+  public FinishRegistrationRequest passportIssueBranch(String passportIssueBranch) {
     this.passportIssueBranch = passportIssueBranch;
     return this;
   }
@@ -169,7 +169,7 @@ public class FinishRegistrationRequestDTO implements Serializable {
     this.passportIssueBranch = passportIssueBranch;
   }
 
-  public FinishRegistrationRequestDTO employment(EmploymentDTO employment) {
+  public FinishRegistrationRequest employment(Employment employment) {
     this.employment = employment;
     return this;
   }
@@ -181,15 +181,15 @@ public class FinishRegistrationRequestDTO implements Serializable {
   @NotNull @Valid 
   @Schema(name = "employment", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("employment")
-  public EmploymentDTO getEmployment() {
+  public Employment getEmployment() {
     return employment;
   }
 
-  public void setEmployment(EmploymentDTO employment) {
+  public void setEmployment(Employment employment) {
     this.employment = employment;
   }
 
-  public FinishRegistrationRequestDTO account(String account) {
+  public FinishRegistrationRequest account(String account) {
     this.account = account;
     return this;
   }
@@ -217,14 +217,14 @@ public class FinishRegistrationRequestDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FinishRegistrationRequestDTO finishRegistrationRequestDTO = (FinishRegistrationRequestDTO) o;
-    return Objects.equals(this.gender, finishRegistrationRequestDTO.gender) &&
-        Objects.equals(this.maritalStatus, finishRegistrationRequestDTO.maritalStatus) &&
-        Objects.equals(this.dependentAmount, finishRegistrationRequestDTO.dependentAmount) &&
-        Objects.equals(this.passportIssueDate, finishRegistrationRequestDTO.passportIssueDate) &&
-        Objects.equals(this.passportIssueBranch, finishRegistrationRequestDTO.passportIssueBranch) &&
-        Objects.equals(this.employment, finishRegistrationRequestDTO.employment) &&
-        Objects.equals(this.account, finishRegistrationRequestDTO.account);
+    FinishRegistrationRequest finishRegistrationRequest = (FinishRegistrationRequest) o;
+    return Objects.equals(this.gender, finishRegistrationRequest.gender) &&
+        Objects.equals(this.maritalStatus, finishRegistrationRequest.maritalStatus) &&
+        Objects.equals(this.dependentAmount, finishRegistrationRequest.dependentAmount) &&
+        Objects.equals(this.passportIssueDate, finishRegistrationRequest.passportIssueDate) &&
+        Objects.equals(this.passportIssueBranch, finishRegistrationRequest.passportIssueBranch) &&
+        Objects.equals(this.employment, finishRegistrationRequest.employment) &&
+        Objects.equals(this.account, finishRegistrationRequest.account);
   }
 
   @Override
@@ -235,7 +235,7 @@ public class FinishRegistrationRequestDTO implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FinishRegistrationRequestDTO {\n");
+    sb.append("class FinishRegistrationRequest {\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    maritalStatus: ").append(toIndentedString(maritalStatus)).append("\n");
     sb.append("    dependentAmount: ").append(toIndentedString(dependentAmount)).append("\n");
