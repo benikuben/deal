@@ -25,7 +25,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "FinishRegistrationRequest", description = "Finish registration request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-29T12:41:16.541503800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-08-30T17:25:18.342929200+03:00[Europe/Moscow]")
 public class FinishRegistrationRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;

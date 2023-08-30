@@ -7,6 +7,8 @@ import ru.neoflex.deal.models.Application;
 import ru.neoflex.deal.repositories.ApplicationRepository;
 import ru.neoflex.deal.exceptions.NotFoundException;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -22,5 +24,10 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Application findById(Long id) {
         return applicationRepository.findApplicationById(id).orElseThrow(() -> new NotFoundException("Заявка " + id + " не найдена"));
+    }
+
+    @Override
+    public List<Application> findAll() {
+        return applicationRepository.findAll();
     }
 }

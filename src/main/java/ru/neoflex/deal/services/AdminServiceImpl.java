@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import ru.neoflex.deal.util.mappers.ApplicationMapper;
 import ru.neoflex.openapi.dtos.*;
 
+import java.util.List;
+
 import static ru.neoflex.deal.services.DealServiceImpl.updateStatus;
 
 @Slf4j
@@ -21,6 +23,14 @@ public class AdminServiceImpl implements AdminService {
         log.info("Application with id {} was found in database", applicationId);
 
         return applicationMapper.applicationToApplicationDTO(application);
+    }
+
+    @Override
+    public List<Application> getAllApplications() {
+        List<Application> applications = applicationService.findAll()
+                .stream().map(applicationMapper::applicationToApplicationDTO).toList();
+        log.info("All applications - {}", applications);
+        return applications;
     }
 
     @Override

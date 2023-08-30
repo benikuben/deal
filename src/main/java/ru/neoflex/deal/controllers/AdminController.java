@@ -9,6 +9,8 @@ import ru.neoflex.deal.services.AdminService;
 import ru.neoflex.openapi.controllers.AdminApi;
 import ru.neoflex.openapi.dtos.Application;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/deal")
@@ -24,5 +26,10 @@ public class AdminController implements AdminApi {
     public ResponseEntity<Void> updateApplicationStatus(Long applicationId, String body) {
         adminService.updateApplicationStatus(applicationId, body);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<Application>> getAllApplications() {
+        return new ResponseEntity<>(adminService.getAllApplications(), HttpStatus.OK);
     }
 }

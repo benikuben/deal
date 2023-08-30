@@ -170,6 +170,17 @@ paths:
       responses:
         '200':
           description: Successfully updated
+  /admin/application:
+    get:
+      summary: Get all applications
+      operationId: getAllApplications
+      responses:
+        '200':
+          description: Received applications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applications'
 components:
   schemas:
     LoanApplicationRequest:
@@ -681,6 +692,11 @@ components:
           type: string
           description: Ses code
           example: 1234
+    Applications:
+      description: All applications
+      type: array
+      items:
+        $ref: '#/components/schemas/Application'
     ErrorResponse:
       description: Error
       type: object
