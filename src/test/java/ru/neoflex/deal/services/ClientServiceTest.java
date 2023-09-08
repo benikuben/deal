@@ -23,7 +23,7 @@ class ClientServiceTest {
     private ClientRepository clientRepository;
 
     @InjectMocks
-    private ClientService clientService;
+    private ClientServiceImpl clientService;
 
     @Test
     void save() {

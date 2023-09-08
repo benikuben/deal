@@ -25,7 +25,7 @@ class CreditServiceTest {
     private CreditRepository creditRepository;
 
     @InjectMocks
-    private CreditService creditService;
+    private CreditServiceImpl creditService;
 
     @Test
     void save() {

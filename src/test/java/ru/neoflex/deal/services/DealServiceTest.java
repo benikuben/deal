@@ -28,13 +28,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class DealServiceTest {
     @Mock
-    private ApplicationService applicationService;
+    private ApplicationServiceImpl applicationService;
     @Mock
     private ConveyorClient conveyorClient;
     @Mock
-    private KafkaProducer emailSender;
+    private KafkaProducerImpl emailSender;
     @Mock
-    private ClientService clientService;
+    private ClientServiceImpl clientService;
     @InjectMocks
     private DealServiceImpl dealService;
 

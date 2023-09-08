@@ -16,7 +16,6 @@ import ru.neoflex.openapi.dtos.ChangeType;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,14 +29,14 @@ class ApplicationServiceTest {
     private ApplicationRepository applicationRepository;
 
     @InjectMocks
-    private ApplicationService applicationService;
+    private ApplicationServiceImpl applicationService;
 
     @Test
     void save() {
         Client client = Client.builder()
                 .id(1L).build();
         List<ApplicationStatusHistory> history =
-                new ArrayList<>(Arrays.asList(
+                new ArrayList<>(List.of(
                         new ApplicationStatusHistory(ApplicationStatus.PREAPPROVAL, LocalDateTime.now(), ChangeType.AUTOMATIC))
                 );
         Application application = Application.builder()

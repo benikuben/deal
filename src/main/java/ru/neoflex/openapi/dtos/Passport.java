@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "Passport", description = "Passport")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-04T21:19:31.333702200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-08T19:52:55.385320200+03:00[Europe/Moscow]")
 public class Passport implements Serializable {
 
   private static final long serialVersionUID = 1L;
