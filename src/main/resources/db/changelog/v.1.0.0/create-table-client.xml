@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-client" author="Veronika Kulieva">
+        <createTable tableName="client">
+            <column name="client_id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="last_name" type="varchar(30)"/>
+            <column name="first_name" type="varchar(30)"/>
+            <column name="middle_name" type="varchar(30)"/>
+            <column name="birth_date" type="date"/>
+            <column name="email" type="varchar(100)"/>
+            <column name="gender" type="varchar(10)"/>
+            <column name="martial_status" type="varchar(13)"/>
+            <column name="dependent_amount" type="int"/>
+            <column name="passport_id" type="jsonb"/>
+            <column name="employment_id" type="jsonb"/>
+            <column name="account" type="varchar(20)"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="client"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

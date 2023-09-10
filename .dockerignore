@@ -1,0 +1,7 @@
+Dockerfile
+.git
+.idea
+.openapi-generator-ignore
+.openapi-generator
+.gitignore
+.github
