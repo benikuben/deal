@@ -36,7 +36,7 @@ public class ErrorHandlingControllerAdvice {
                                 error.getPropertyPath().toString() + " " + error.getMessage()
                         )
                 )
-                .collect(Collectors.toList());
+                .toList();
     }
 
 
@@ -46,7 +46,7 @@ public class ErrorHandlingControllerAdvice {
     public List<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
         return e.getBindingResult().getFieldErrors().stream()
                 .map(error -> new ErrorResponse(error.getField() + " " + error.getDefaultMessage()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @ExceptionHandler(NotFoundException.class)

@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "LoanApplicationRequest", description = "Loan application request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-09T21:46:31.872492100+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-10T00:47:20.725375700+03:00[Europe/Moscow]")
 public class LoanApplicationRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;

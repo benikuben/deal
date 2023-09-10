@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class DealServiceImpl implements DealService {
-    private final static ErrorResponse LOAN_REJECTION = new ErrorResponse("Отказ в одобрении кредита");
+    private static final ErrorResponse LOAN_REJECTION = new ErrorResponse("Отказ в одобрении кредита");
     private final ClientMapper clientMapper;
     private final CreditMapper creditMapper;
     private final ClientService clientService;

@@ -11,7 +11,7 @@ import ru.neoflex.openapi.dtos.ChangeType;
 import ru.neoflex.openapi.dtos.EmailMessage;
 import ru.neoflex.openapi.dtos.Theme;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import static ru.neoflex.deal.services.DealServiceImpl.updateStatus;
 
@@ -19,6 +19,7 @@ import static ru.neoflex.deal.services.DealServiceImpl.updateStatus;
 @Service
 @RequiredArgsConstructor
 public class DocumentServiceImpl implements DocumentService {
+    private final SecureRandom random = new SecureRandom();
     private final KafkaProducer emailSender;
     private final ApplicationService applicationService;
 
@@ -107,7 +108,6 @@ public class DocumentServiceImpl implements DocumentService {
     private Integer generateSes() {
         int max = 9999;
         int min = 1000;
-        Random random = new Random();
         return random.nextInt((max - min) + 1) + min;
     }
 }
